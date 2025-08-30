@@ -7,7 +7,16 @@ from .utils import logger, chunk_text
 class EmbeddingsManager:
     def __init__(self, collection_name: str = "api_docs"):
         self.model = SentenceTransformer('all-MiniLM-L6-v2')
-        self.client = chromadb.PersistentClient(path="./chroma_db")
+        
+        # Use in-memory client for hosting compatibility
+        try:
+            # Try persistent client first (for local development)
+            self.client = chromadb.PersistentClient(path="./chroma_db")
+        except Exception as e:
+            logger.warning(f"Persistent client failed ({e}), using in-memory client")
+            # Fallback to in-memory client for hosting environments
+            self.client = chromadb.Client()
+        
         self.collection = self._get_collection(collection_name)
         logger.info(f"Initialized embeddings with {collection_name}")
     
