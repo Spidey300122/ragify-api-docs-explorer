@@ -7,7 +7,11 @@ from .utils import logger, chunk_text
 class EmbeddingsManager:
     def __init__(self, collection_name: str = "api_docs"):
         self.model = SentenceTransformer('all-MiniLM-L6-v2')
-        self.client = chromadb.PersistentClient(path="./chroma_db")
+        
+        # Force in-memory client for Streamlit Cloud compatibility
+        logger.info("Using in-memory ChromaDB client for cloud deployment")
+        self.client = chromadb.Client()
+        
         self.collection = self._get_collection(collection_name)
         logger.info(f"Initialized embeddings with {collection_name}")
     
@@ -41,7 +45,7 @@ class EmbeddingsManager:
         
         if not documents: return 0
         
-        # Process in batches
+        # Process in batches to avoid memory issues
         batch_size = 50
         total = 0
         for i in range(0, len(documents), batch_size):
@@ -49,14 +53,19 @@ class EmbeddingsManager:
             batch_meta = metadatas[i:i + batch_size]
             batch_ids = ids[i:i + batch_size]
             
-            embeddings = self.create_embeddings(batch_docs)
-            self.collection.add(
-                documents=batch_docs,
-                embeddings=embeddings,
-                metadatas=batch_meta,
-                ids=batch_ids
-            )
-            total += len(batch_docs)
+            try:
+                embeddings = self.create_embeddings(batch_docs)
+                self.collection.add(
+                    documents=batch_docs,
+                    embeddings=embeddings,
+                    metadatas=batch_meta,
+                    ids=batch_ids
+                )
+                total += len(batch_docs)
+                logger.info(f"Added batch of {len(batch_docs)} documents")
+            except Exception as e:
+                logger.error(f"Error adding batch: {e}")
+                continue
         
         return total
     
