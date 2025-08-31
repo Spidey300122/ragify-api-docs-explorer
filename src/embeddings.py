@@ -7,11 +7,7 @@ from .utils import logger, chunk_text
 class EmbeddingsManager:
     def __init__(self, collection_name: str = "api_docs"):
         self.model = SentenceTransformer('all-MiniLM-L6-v2')
-        
-        # Force in-memory client for Streamlit Cloud compatibility
-        logger.info("Using in-memory ChromaDB client for cloud deployment")
-        self.client = chromadb.Client()
-        
+        self.client = chromadb.PersistentClient(path="./chroma_db")
         self.collection = self._get_collection(collection_name)
         logger.info(f"Initialized embeddings with {collection_name}")
     
@@ -45,7 +41,7 @@ class EmbeddingsManager:
         
         if not documents: return 0
         
-        # Process in batches to avoid memory issues
+        # Process in batches
         batch_size = 50
         total = 0
         for i in range(0, len(documents), batch_size):
@@ -53,19 +49,14 @@ class EmbeddingsManager:
             batch_meta = metadatas[i:i + batch_size]
             batch_ids = ids[i:i + batch_size]
             
-            try:
-                embeddings = self.create_embeddings(batch_docs)
-                self.collection.add(
-                    documents=batch_docs,
-                    embeddings=embeddings,
-                    metadatas=batch_meta,
-                    ids=batch_ids
-                )
-                total += len(batch_docs)
-                logger.info(f"Added batch of {len(batch_docs)} documents")
-            except Exception as e:
-                logger.error(f"Error adding batch: {e}")
-                continue
+            embeddings = self.create_embeddings(batch_docs)
+            self.collection.add(
+                documents=batch_docs,
+                embeddings=embeddings,
+                metadatas=batch_meta,
+                ids=batch_ids
+            )
+            total += len(batch_docs)
         
         return total
     
@@ -74,18 +65,24 @@ class EmbeddingsManager:
             query_embedding = self.create_embeddings([query])[0]
             results = self.collection.query(
                 query_embeddings=[query_embedding],
-                n_results=n_results,
+                n_results=n_results * 3,  # Get more results to filter duplicates
                 include=['documents', 'metadatas', 'distances']
             )
             
             formatted = []
+            seen_urls = set()  # Track unique URLs to avoid duplicates
             if results['documents'] and results['documents'][0]:
                 for i in range(len(results['documents'][0])):
-                    formatted.append({
-                        "content": results['documents'][0][i],
-                        "metadata": results['metadatas'][0][i],
-                        "similarity": 1 - results['distances'][0][i]
-                    })
+                    url = results['metadatas'][0][i].get('url', '')
+                    if url not in seen_urls:  # Only add if URL not seen before
+                        seen_urls.add(url)
+                        formatted.append({
+                            "content": results['documents'][0][i],
+                            "metadata": results['metadatas'][0][i],
+                            "similarity": 1 - results['distances'][0][i]
+                        })
+                        if len(formatted) >= n_results:  # Stop when we have enough unique results
+                            break
             return formatted
         except Exception as e:
             logger.error(f"Search error: {e}")
