@@ -34,17 +34,19 @@ st.markdown("""<style>
     box-shadow: 0 20px 60px rgba(0,0,0,0.2);
 }
 
-/* Chat messages - Neon style */
+/* Chat messages - Neon style with always visible questions */
 .chat-message {
     padding: 2rem; 
     border-radius: 20px; 
     margin: 1.5rem 0; 
     background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-    color: white; 
+    color: white !important; 
     border: 2px solid rgba(255,255,255,0.3);
     box-shadow: 0 10px 30px rgba(102, 126, 234, 0.4);
     position: relative;
     overflow: hidden;
+    opacity: 1 !important;
+    display: block !important;
 }
 
 .chat-message::before {
@@ -60,7 +62,7 @@ st.markdown("""<style>
     100% { transform: translateX(100%); }
 }
 
-/* Buttons - Electric neon */
+/* Buttons - Electric neon with fixed white text */
 .stButton > button {
     width: 100% !important; 
     margin: 0.5rem 0 !important; 
@@ -82,6 +84,13 @@ st.markdown("""<style>
     transform: translateY(-5px) scale(1.02) !important;
     box-shadow: 0 15px 35px rgba(255, 107, 107, 0.4) !important;
     border-color: rgba(255,255,255,0.5) !important;
+    color: white !important;
+}
+
+.stButton > button:focus,
+.stButton > button:active {
+    color: white !important;
+    background: linear-gradient(135deg, #FF6B6B, #4ECDC4) !important;
 }
 
 /* Success status - Glowing */
@@ -139,7 +148,7 @@ st.markdown("""<style>
     text-shadow: none !important;
 }
 
-/* Enhanced Sidebar Buttons with White Font */
+/* Enhanced Sidebar Buttons with White Font FIXED */
 [data-testid="stSidebar"] .stButton > button {
     background: #1976d2 !important;
     color: white !important;
@@ -161,7 +170,14 @@ st.markdown("""<style>
     border-color: #138496 !important;
     transform: translateY(-2px) !important;
     box-shadow: 0 6px 20px rgba(23, 162, 184, 0.3) !important;
-    color: white !important;  /* <-- Add this line if it's missing */
+    color: white !important;
+}
+
+[data-testid="stSidebar"] .stButton > button:focus,
+[data-testid="stSidebar"] .stButton > button:active {
+    background: #138496 !important;
+    border-color: #138496 !important;
+    color: white !important;
 }
 
 /* Sidebar Input Fields */
@@ -281,7 +297,7 @@ h2, h3 {
     box-shadow: 0 10px 25px rgba(255, 107, 107, 0.3) !important;
 }
 
-/* Text inputs - Glowing */
+/* Text inputs - Glowing with always visible questions */
 .stTextInput > div > div > input {
     background: rgba(255,255,255,0.15) !important;
     backdrop-filter: blur(10px) !important;
@@ -291,11 +307,20 @@ h2, h3 {
     font-weight: 600 !important;
     padding: 1rem !important;
     font-size: 16px !important;
+    opacity: 1 !important;
 }
 
 .stTextInput > div > div > input:focus {
     border-color: #4ECDC4 !important;
     box-shadow: 0 0 20px rgba(78, 205, 196, 0.5) !important;
+    opacity: 1 !important;
+}
+
+/* Question text always visible */
+.stTextInput label,
+.stTextInput > div > div > input::placeholder {
+    color: rgba(255,255,255,0.8) !important;
+    opacity: 1 !important;
 }
 
 /* Custom response header */
