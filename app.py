@@ -5,103 +5,26 @@ sys.path.append(os.path.dirname(os.path.abspath(__file__)))
 
 st.set_page_config(page_title="🚀 Smart API Docs Assistant", page_icon="🚀", layout="wide")
 
-# Enhanced CSS with better contrast and proper branding
+# Clean, classic styling
 st.markdown("""<style>
-.main-header {
-    background: linear-gradient(135deg, #2563eb 0%, #1e40af 50%, #1d4ed8 100%);
-    padding: 2rem; border-radius: 12px; color: white; text-align: center; 
-    margin-bottom: 2rem; box-shadow: 0 8px 32px rgba(37, 99, 235, 0.4);
-}
-.main-header h1 {margin: 0; font-size: 2.2rem; font-weight: 700;}
-.main-header p {margin: 0.8rem 0 0 0; font-size: 1rem; line-height: 1.5;}
-
-.api-brands {
-    display: flex; justify-content: center; gap: 2rem; margin: 1.5rem 0;
-    flex-wrap: wrap; align-items: center;
-}
-.brand-item {
-    display: flex; align-items: center; gap: 0.5rem; 
-    background: rgba(255,255,255,0.1); padding: 0.8rem 1.2rem; 
-    border-radius: 8px; backdrop-filter: blur(10px);
-    font-weight: 600; font-size: 0.9rem;
-}
-
 .chat-message {
-    padding: 1.5rem; border-radius: 12px; margin: 1.5rem 0; 
-    background: linear-gradient(145deg, #f8fafc 0%, #e2e8f0 100%); 
-    border-left: 4px solid #2563eb; 
-    box-shadow: 0 4px 16px rgba(37, 99, 235, 0.1); color: #1e293b;
-    font-size: 1rem; line-height: 1.6;
-}
-
-.response-header {
-    background: linear-gradient(90deg, #2563eb 0%, #3b82f6 100%);
-    color: white; padding: 1rem 1.5rem; border-radius: 8px 8px 0 0;
-    font-weight: 600; font-size: 1.1rem; margin-bottom: 0;
-}
-
-.sources-section {
-    background: #f1f5f9; padding: 1.5rem; border-radius: 8px;
-    margin-top: 1.5rem; border: 1px solid #e2e8f0;
-}
-
-.source-item {
-    background: white; padding: 1rem; border-radius: 8px; margin: 0.5rem 0;
-    border-left: 3px solid #10b981; box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+    padding: 1.2rem; border-radius: 8px; margin: 1rem 0; 
+    background: #f8fafc; border-left: 4px solid #3b82f6; 
+    border: 1px solid #e2e8f0; color: #1e293b;
 }
 
 .stButton > button {
-    width: 100%; margin: 0.3rem 0; border-radius: 8px;
-    background: linear-gradient(135deg, #2563eb 0%, #1d4ed8 100%);
-    color: white; border: none; padding: 0.8rem; font-weight: 600;
-    transition: all 0.3s ease; font-size: 0.9rem;
+    width: 100%; margin: 0.2rem 0; border-radius: 6px;
+    background: #3b82f6; color: white; border: none; 
+    padding: 0.6rem; font-weight: 500;
 }
 .stButton > button:hover {
-    transform: translateY(-2px); box-shadow: 0 6px 20px rgba(37, 99, 235, 0.4);
-    background: linear-gradient(135deg, #1d4ed8 0%, #1e40af 100%);
-}
-
-.quick-questions {
-    background: #f8fafc; padding: 2rem; border-radius: 12px;
-    border: 1px solid #e2e8f0; margin-top: 2rem;
-}
-.quick-questions h3 {
-    color: #1e293b; margin-bottom: 1.5rem; text-align: center;
-    font-size: 1.3rem; font-weight: 700;
-}
-
-.question-grid {
-    display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-    gap: 1rem; margin-top: 1rem;
-}
-
-.brand-claude { color: #ff6b35; }
-.brand-gemini { color: #4285f4; }
-.brand-github { color: #333; }
-
-.sidebar .stMarkdown {
-    background: #f1f5f9; padding: 1rem; border-radius: 8px; 
-    margin: 0.5rem 0; color: #334155;
+    background: #2563eb;
 }
 
 .status-success {
-    background: linear-gradient(135deg, #059669 0%, #047857 100%);
-    color: white; padding: 1rem; border-radius: 8px; text-align: center;
-    box-shadow: 0 4px 12px rgba(5, 150, 105, 0.3);
-    font-weight: 600;
-}
-
-.steps-flow {
-    background: rgba(255,255,255,0.2); padding: 1rem; border-radius: 8px;
-    margin: 1rem 0; font-size: 0.95rem; backdrop-filter: blur(10px);
-}
-
-ol, ul {
-    padding-left: 1.5rem !important;
-}
-li {
-    margin: 0.5rem 0 !important;
-    line-height: 1.6 !important;
+    background: #10b981; color: white; padding: 0.8rem; 
+    border-radius: 6px; text-align: center; font-weight: 500;
 }
 </style>""", unsafe_allow_html=True)
 
@@ -164,30 +87,22 @@ def process_question(question: str):
 def main():
     init_session()
     
-    st.markdown('''
-    <div class="main-header">
-        <h1>🚀 RAGify API Docs Explorer</h1>
-        <p><strong>AI-Powered API Documentation Assistant</strong><br>
-        Get instant answers from Claude, Gemini & GitHub documentation using advanced RAG technology</p>
-        
-        <div class="api-brands">
-            <div class="brand-item brand-claude">
-                <span>🟠</span> Anthropic Claude
-            </div>
-            <div class="brand-item brand-gemini">
-                <span>🔵</span> Google Gemini
-            </div>
-            <div class="brand-item brand-github">
-                <span>⚫</span> GitHub API
-            </div>
-        </div>
-        
-        <div class="steps-flow">
-            <strong>Quick Start:</strong> 
-            1️⃣ Add Groq API Key → 2️⃣ Load Documentation → 3️⃣ Ask Questions! 🎯
-        </div>
-    </div>
-    ''', unsafe_allow_html=True)
+    # Clean header without complex HTML
+    st.markdown("# 🚀 RAGify API Docs Explorer")
+    st.markdown("### AI-Powered API Documentation Assistant")
+    st.markdown("Get instant answers from **Claude**, **Gemini** & **GitHub** documentation using advanced RAG technology")
+    
+    # Simple brand display
+    col1, col2, col3 = st.columns(3)
+    with col1:
+        st.markdown("**🟠 Anthropic Claude**  \n*Messages, Streaming, Tool Use*")
+    with col2:
+        st.markdown("**🔵 Google Gemini**  \n*Generation, Embeddings, Safety*") 
+    with col3:
+        st.markdown("**⚫ GitHub API**  \n*Repos, Issues, Authentication*")
+    
+    st.markdown("---")
+    st.info("**Quick Start:** 1️⃣ Add Groq API Key → 2️⃣ Load Documentation → 3️⃣ Ask Questions!")
     
     # Enhanced sidebar
     with st.sidebar:
@@ -281,11 +196,7 @@ def main():
     
     # Enhanced quick questions
     if st.session_state.docs_loaded:
-        st.markdown('''
-        <div class="quick-questions">
-            <h3>⚡ Popular Questions</h3>
-        </div>
-        ''', unsafe_allow_html=True)
+        st.markdown("### ⚡ Popular Questions")
         
         questions = [
             ("🟠 Claude Messages API", "How does the Anthropic Messages API work with system prompts and role structure?"),
