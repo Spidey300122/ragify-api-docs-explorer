@@ -3,9 +3,9 @@ import sys
 import os
 sys.path.append(os.path.dirname(os.path.abspath(__file__)))
 
-st.set_page_config(page_title="🤖 Smart API Docs Assistant", page_icon="🤖", layout="wide")
+st.set_page_config(page_title="🚀 Smart API Docs Assistant", page_icon="🚀", layout="wide")
 
-# Enhanced CSS with better contrast
+# Enhanced CSS with better contrast and proper branding
 st.markdown("""<style>
 .main-header {
     background: linear-gradient(135deg, #2563eb 0%, #1e40af 50%, #1d4ed8 100%);
@@ -15,31 +15,93 @@ st.markdown("""<style>
 .main-header h1 {margin: 0; font-size: 2.2rem; font-weight: 700;}
 .main-header p {margin: 0.8rem 0 0 0; font-size: 1rem; line-height: 1.5;}
 
+.api-brands {
+    display: flex; justify-content: center; gap: 2rem; margin: 1.5rem 0;
+    flex-wrap: wrap; align-items: center;
+}
+.brand-item {
+    display: flex; align-items: center; gap: 0.5rem; 
+    background: rgba(255,255,255,0.1); padding: 0.8rem 1.2rem; 
+    border-radius: 8px; backdrop-filter: blur(10px);
+    font-weight: 600; font-size: 0.9rem;
+}
+
 .chat-message {
-    padding: 1.2rem; border-radius: 10px; margin: 1rem 0; 
-    background: #f8fafc; border-left: 4px solid #2563eb; 
-    box-shadow: 0 2px 8px rgba(37, 99, 235, 0.1); color: #1e293b;
+    padding: 1.5rem; border-radius: 12px; margin: 1.5rem 0; 
+    background: linear-gradient(145deg, #f8fafc 0%, #e2e8f0 100%); 
+    border-left: 4px solid #2563eb; 
+    box-shadow: 0 4px 16px rgba(37, 99, 235, 0.1); color: #1e293b;
+    font-size: 1rem; line-height: 1.6;
+}
+
+.response-header {
+    background: linear-gradient(90deg, #2563eb 0%, #3b82f6 100%);
+    color: white; padding: 1rem 1.5rem; border-radius: 8px 8px 0 0;
+    font-weight: 600; font-size: 1.1rem; margin-bottom: 0;
+}
+
+.sources-section {
+    background: #f1f5f9; padding: 1.5rem; border-radius: 8px;
+    margin-top: 1.5rem; border: 1px solid #e2e8f0;
+}
+
+.source-item {
+    background: white; padding: 1rem; border-radius: 8px; margin: 0.5rem 0;
+    border-left: 3px solid #10b981; box-shadow: 0 2px 4px rgba(0,0,0,0.05);
 }
 
 .stButton > button {
-    width: 100%; margin: 0.2rem 0; border-radius: 6px;
+    width: 100%; margin: 0.3rem 0; border-radius: 8px;
     background: linear-gradient(135deg, #2563eb 0%, #1d4ed8 100%);
-    color: white; border: none; padding: 0.6rem; font-weight: 600;
-    transition: all 0.2s ease;
+    color: white; border: none; padding: 0.8rem; font-weight: 600;
+    transition: all 0.3s ease; font-size: 0.9rem;
 }
 .stButton > button:hover {
-    transform: translateY(-1px); box-shadow: 0 4px 12px rgba(37, 99, 235, 0.3);
+    transform: translateY(-2px); box-shadow: 0 6px 20px rgba(37, 99, 235, 0.4);
+    background: linear-gradient(135deg, #1d4ed8 0%, #1e40af 100%);
 }
 
+.quick-questions {
+    background: #f8fafc; padding: 2rem; border-radius: 12px;
+    border: 1px solid #e2e8f0; margin-top: 2rem;
+}
+.quick-questions h3 {
+    color: #1e293b; margin-bottom: 1.5rem; text-align: center;
+    font-size: 1.3rem; font-weight: 700;
+}
+
+.question-grid {
+    display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 1rem; margin-top: 1rem;
+}
+
+.brand-claude { color: #ff6b35; }
+.brand-gemini { color: #4285f4; }
+.brand-github { color: #333; }
+
 .sidebar .stMarkdown {
-    background: #f1f5f9; padding: 0.8rem; border-radius: 8px; 
-    margin: 0.3rem 0; color: #334155;
+    background: #f1f5f9; padding: 1rem; border-radius: 8px; 
+    margin: 0.5rem 0; color: #334155;
 }
 
 .status-success {
     background: linear-gradient(135deg, #059669 0%, #047857 100%);
-    color: white; padding: 0.8rem; border-radius: 8px; text-align: center;
-    box-shadow: 0 2px 8px rgba(5, 150, 105, 0.3);
+    color: white; padding: 1rem; border-radius: 8px; text-align: center;
+    box-shadow: 0 4px 12px rgba(5, 150, 105, 0.3);
+    font-weight: 600;
+}
+
+.steps-flow {
+    background: rgba(255,255,255,0.2); padding: 1rem; border-radius: 8px;
+    margin: 1rem 0; font-size: 0.95rem; backdrop-filter: blur(10px);
+}
+
+ol, ul {
+    padding-left: 1.5rem !important;
+}
+li {
+    margin: 0.5rem 0 !important;
+    line-height: 1.6 !important;
 }
 </style>""", unsafe_allow_html=True)
 
@@ -64,7 +126,7 @@ def load_docs():
         progress.progress(0.25)
         
         status.text("📋 Collecting documentation...")
-        urls = [url for urls_list in API_DOCS_URLS.values() for url in urls_list]  # Fixed: removed [:2] limit
+        urls = [url for urls_list in API_DOCS_URLS.values() for url in urls_list]
         progress.progress(0.5)
         
         status.text(f"📖 Processing {len(urls)} pages...")
@@ -81,13 +143,13 @@ def load_docs():
         status.markdown(f'<div class="status-success">✨ Ready! Loaded {docs_added} documentation chunks</div>', unsafe_allow_html=True)
         return True
     except Exception as e:
-        st.error(f"❌ Error: {e}")
+        st.error(f"⚠️ Error: {e}")
         return False
 
 def process_question(question: str):
     st.session_state.current_query = question
     if st.session_state.rag_assistant:
-        with st.spinner("🔍 Searching..."):
+        with st.spinner("🔍 Searching knowledge base..."):
             try:
                 result = st.session_state.rag_assistant.search_and_respond(question, st.session_state.conversation)
                 st.session_state.last_result = result
@@ -97,7 +159,7 @@ def process_question(question: str):
                     {"role": "assistant", "content": result["response"]}
                 ])
             except Exception as e:
-                st.error(f"❌ Error: {e}")
+                st.error(f"⚠️ Error processing question: {e}")
 
 def main():
     init_session()
@@ -105,78 +167,133 @@ def main():
     st.markdown('''
     <div class="main-header">
         <h1>🚀 RAGify API Docs Explorer</h1>
-        <p><strong>Ask questions about API documentation (Claude, Gemini, GitHub integration help!)</strong><br>
-        🟡 <strong>Anthropic:</strong> Messages, Streaming, System Prompts, Tool Use | 
-        🔵 <strong>Google:</strong> Gemini Generate, Chat, Embeddings, Safety Settings | 
-        ⚫ <strong>GitHub:</strong> Repos, Authentication, Issues, Users<br>
-        <em>📋 Steps: 1️⃣ Create Groq key → 2️⃣ Press Enter & "Load Documentation" → 3️⃣ Wait ~30 sec → 4️⃣ Ready to go! 🔥</em></p>
+        <p><strong>AI-Powered API Documentation Assistant</strong><br>
+        Get instant answers from Claude, Gemini & GitHub documentation using advanced RAG technology</p>
+        
+        <div class="api-brands">
+            <div class="brand-item brand-claude">
+                <span>🟠</span> Anthropic Claude
+            </div>
+            <div class="brand-item brand-gemini">
+                <span>🔵</span> Google Gemini
+            </div>
+            <div class="brand-item brand-github">
+                <span>⚫</span> GitHub API
+            </div>
+        </div>
+        
+        <div class="steps-flow">
+            <strong>Quick Start:</strong> 
+            1️⃣ Add Groq API Key → 2️⃣ Load Documentation → 3️⃣ Ask Questions! 🎯
+        </div>
     </div>
     ''', unsafe_allow_html=True)
     
-    # Compact sidebar
+    # Enhanced sidebar
     with st.sidebar:
-        st.header("⚙️ Setup")
+        st.markdown("### ⚙️ Setup")
         
-        groq_key = st.text_input("🔑 Groq API Key:", type="password", help="Free key from console.groq.com")
+        groq_key = st.text_input(
+            "🔑 Groq API Key:", 
+            type="password", 
+            help="Get your free API key from console.groq.com",
+            placeholder="gsk_..."
+        )
+        
         if groq_key:
             os.environ["GROQ_API_KEY"] = groq_key
-            st.success("🚀 Connected!")
+            st.success("🚀 API Key Connected!")
         
-        if st.button("🔥 Load Documentation", type="primary", disabled=not groq_key):
+        if st.button("📥 Load Documentation", type="primary", disabled=not groq_key):
             if load_docs():
                 st.rerun()
         
         if st.session_state.docs_loaded:
-            st.markdown('<div class="status-success">✅ Ready</div>', unsafe_allow_html=True)
+            st.markdown('<div class="status-success">✅ Documentation Ready</div>', unsafe_allow_html=True)
         else:
-            st.warning("⚠️ Load docs first")
+            st.warning("⚠️ Load documentation first")
         
-        if st.button("🔄 Reset"):
+        st.markdown("---")
+        
+        if st.button("🔄 Reset Application"):
             st.session_state.clear()
             st.rerun()
+        
+        # API Coverage Info
+        st.markdown("### 📚 Coverage")
+        st.markdown("""
+        **🟠 Claude API:**
+        - Messages & Streaming
+        - System Prompts & Tool Use
+        - Function Calling
+        
+        **🔵 Gemini API:**
+        - Content Generation
+        - Embeddings & Safety
+        - Chat & Function Calling
+        
+        **⚫ GitHub API:**
+        - Repositories & Authentication  
+        - Issues & Users
+        - REST API Endpoints
+        """)
     
     # Main interface
     if not groq_key:
-        st.info("🔑 Get your free Groq API key from https://console.groq.com")
+        st.info("🔑 **Get Started:** Obtain your free Groq API key from https://console.groq.com")
         return
     
     if not st.session_state.docs_loaded:
-        st.info("📚 Click 'Load Documentation' to start!")
+        st.info("📚 **Next Step:** Click 'Load Documentation' to initialize the knowledge base!")
         return
     
-    # Chat interface
-    st.subheader("💬 Ask Your Question")
-    query = st.text_input("Enter your question", value=st.session_state.current_query,  # Fixed: added proper label
-                         placeholder="e.g., How do I create an S3 bucket using AWS API?")
+    # Enhanced chat interface
+    st.markdown("### 💬 Ask Your Question")
+    
+    query = st.text_input(
+        "Enter your question about API documentation:",
+        value=st.session_state.current_query,
+        placeholder="e.g., How do I authenticate with Claude API using system prompts?",
+        key="main_query"
+    )
     
     if query and query != st.session_state.get('last_processed_query', ''):
         st.session_state.last_processed_query = query
         process_question(query)
     
-    # Display results
+    # Enhanced results display
     if hasattr(st.session_state, 'last_result'):
-        st.markdown("### 🤖 Response")
+        st.markdown('<div class="response-header">🤖 AI Response</div>', unsafe_allow_html=True)
         st.markdown(f'<div class="chat-message">{st.session_state.last_result["response"]}</div>', 
                    unsafe_allow_html=True)
         
         if st.session_state.last_result["sources"]:
-            st.markdown("### 📖 Sources")
+            st.markdown('''
+            <div class="sources-section">
+                <h4 style="margin-top:0; color:#1e293b;">📖 Documentation Sources</h4>
+            </div>
+            ''', unsafe_allow_html=True)
+            
             for i, source in enumerate(st.session_state.last_result["sources"], 1):
-                with st.expander(f"📄 {source['source']} ({source['similarity']:.0%} match)"):
-                    st.markdown(f"**Title:** {source['title']}")
-                    st.markdown(f"**URL:** [{source['url']}]({source['url']})")
+                with st.expander(f"📄 {source['source']} • {source['similarity']:.0%} relevance"):
+                    st.markdown(f"**📌 Title:** {source['title']}")
+                    st.markdown(f"**🔗 URL:** [{source['url']}]({source['url']})")
     
-    # Quick questions
+    # Enhanced quick questions
     if st.session_state.docs_loaded:
-        st.markdown("### ⚡ Quick Questions")
+        st.markdown('''
+        <div class="quick-questions">
+            <h3>⚡ Popular Questions</h3>
+        </div>
+        ''', unsafe_allow_html=True)
         
         questions = [
-            ("🟡 Claude Messages", "How does the Anthropic Messages API work with system prompts and role structure?"),
-            ("🔵 Gemini Embeddings", "What is the Google embed-content API, explain with task type and models?"),
-            ("⚫ GitHub Repos", "How do I create and manage repositories using GitHub REST API with authentication?"),
-            ("🟡 Claude Tool Use", "How to implement function calling and tool use with Claude API including JSON schema?"),
-            ("🔵 Gemini Safety", "How do I configure safety settings and content filtering in Gemini API?"),
-            ("⚫ GitHub Issues", "How to create, update and manage issues using GitHub API with labels and assignees?")
+            ("🟠 Claude Messages API", "How does the Anthropic Messages API work with system prompts and role structure?"),
+            ("🔵 Gemini Content Generation", "What is the Google Gemini generate-content API and how do I use it?"),
+            ("⚫ GitHub Repository Management", "How do I create and manage repositories using GitHub REST API with authentication?"),
+            ("🟠 Claude Tool Use", "How to implement function calling and tool use with Claude API including JSON schema?"),
+            ("🔵 Gemini Safety Settings", "How do I configure safety settings and content filtering in Gemini API?"),
+            ("⚫ GitHub Issues API", "How to create, update and manage issues using GitHub API with labels and assignees?")
         ]
         
         cols = st.columns(3)
