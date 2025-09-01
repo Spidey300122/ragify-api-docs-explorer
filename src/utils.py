@@ -5,23 +5,23 @@ logging.basicConfig(level=logging.INFO)
 logger = logging.getLogger("RAGify")
 
 API_DOCS_URLS = {
-    "stripe": [
-        "https://stripe.com/docs/api",
-        "https://stripe.com/docs/api/payment_intents",
-        "https://stripe.com/docs/api/customers",
-        "https://stripe.com/docs/api/subscriptions"
+    "anthropic": [
+        "https://docs.anthropic.com/en/api/messages",
+        "https://docs.anthropic.com/en/api/messages-streaming",
+        "https://docs.anthropic.com/en/docs/build-with-claude/tool-use",
+        "https://docs.anthropic.com/en/docs/build-with-claude/prompt-engineering/overview"
+    ],
+    "google": [
+        "https://ai.google.dev/api/generate-content",
+        "https://ai.google.dev/gemini-api/docs/embeddings",
+        "https://ai.google.dev/docs/safety_setting_gemini",
+        "https://ai.google.dev/docs/function_calling"
     ],
     "github": [
         "https://docs.github.com/en/rest/repos",
         "https://docs.github.com/en/rest/authentication",
         "https://docs.github.com/en/rest/issues",
         "https://docs.github.com/en/rest/users"
-    ],
-    "twilio": [
-        "https://www.twilio.com/docs/sms/api",
-        "https://www.twilio.com/docs/voice/api",
-        "https://www.twilio.com/docs/usage/api",
-        "https://www.twilio.com/docs/messaging/api"
     ]
 }
 

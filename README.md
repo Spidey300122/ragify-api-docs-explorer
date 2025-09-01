@@ -1,6 +1,6 @@
 # 🚀 RAGify API Docs Explorer
 
-An advanced RAG-powered assistant that helps developers instantly find answers from API documentation using Retrieval-Augmented Generation. Supports Stripe, GitHub, and Twilio APIs with intelligent semantic search and vector embeddings.
+An advanced RAG-powered assistant that helps developers instantly find answers from API documentation using Retrieval-Augmented Generation. Supports Claude, Gemini, and GitHub APIs with intelligent semantic search and vector embeddings.
 
 ## 📸 Screenshots
 
@@ -15,7 +15,7 @@ An advanced RAG-powered assistant that helps developers instantly find answers f
 - 🔍 **Semantic Search** - AI-powered similarity search through embedded documentation
 - ⚡ **Lightning Fast** - Groq's optimized inference for sub-second responses
 - 💻 **Code Examples** - Practical implementation guides with real API code
-- 🔄 **Multi-API Support** - Stripe, GitHub, and Twilio documentation unified
+- 📄 **Multi-API Support** - Claude, Gemini, and GitHub documentation unified
 - 💬 **Contextual Chat** - Conversation memory for follow-up questions
 - 📖 **Source Attribution** - Always cites original documentation sources
 
@@ -46,19 +46,19 @@ An advanced RAG-powered assistant that helps developers instantly find answers f
 
 4. **Setup Process**
    - 1️⃣ Enter your Groq API key in the sidebar
-   - 2️⃣ Click "📥 Load Documentation" 
+   - 2️⃣ Click "🔥 Load Documentation" 
    - 3️⃣ Wait ~1 minute for RAG processing
    - 4️⃣ Start exploring API docs! 🔥
 
 ## 🤔 Example Queries
 
-- "How do I create a payment intent with Stripe?"
-- "What webhook events does GitHub support?"
-- "Send SMS using Twilio API with authentication"
-- "GitHub repository management best practices"
-- "Stripe subscription lifecycle management"
+- "How does the Anthropic Messages API work with system prompts?"
+- "What is the Google embed-content API, explain with task types?"
+- "How do I authenticate with GitHub REST API?"
+- "How to implement Claude tool use with JSON schema?"
+- "How do I configure Gemini safety settings?"
 
-## 🏗️ RAG Architecture
+## 🗂️ RAG Architecture
 
 ```
 ragify-api-docs-explorer/
@@ -94,9 +94,9 @@ ragify-api-docs-explorer/
 
 | API | Coverage | Use Cases |
 |-----|----------|-----------|
-| 💳 **Stripe** | Payments, Customers, Subscriptions, Billing | Payment processing, recurring billing |
-| 🐙 **GitHub** | Repositories, Issues, Webhooks, Authentication | CI/CD, repo management, integrations |
-| 📱 **Twilio** | SMS, Voice, Messaging, Programmable Communications | Notifications, voice calls, messaging |
+| 🟡 **Anthropic** | Messages, Streaming, Tool Use, Prompts | Claude AI integration, chat apps |
+| 🔵 **Google** | Gemini Generate, Embeddings, Safety | AI content generation, embeddings |
+| ⚫ **GitHub** | Repos, Issues, Users, Authentication | Git workflows, repository management |
 
 ## ⚙️ Configuration
 
@@ -132,11 +132,11 @@ API_DOCS_URLS = {
 4. Push branch (`git push origin feature/rag-enhancement`)
 5. Open Pull Request
 
-## 📝 License
+## 📄 License
 
 This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
 
-## 🙏 Technology Stack
+## 🙌 Technology Stack
 
 - **[Groq](https://groq.com)** - Ultra-fast LLM inference
 - **[ChromaDB](https://www.trychroma.com/)** - Vector database for embeddings
@@ -147,6 +147,3 @@ This project is licensed under the MIT License - see the [LICENSE](LICENSE) file
 
 Found a bug or want to request a RAG enhancement? Open an issue on GitHub!
 
-## ⭐ Show Your Support
-
-Star this repository if RAGify helped accelerate your API integration work!

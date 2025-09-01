@@ -65,23 +65,28 @@ class EmbeddingsManager:
             query_embedding = self.create_embeddings([query])[0]
             results = self.collection.query(
                 query_embeddings=[query_embedding],
-                n_results=n_results * 3,  # Get more results to filter duplicates
+                n_results=n_results * 3,
                 include=['documents', 'metadatas', 'distances']
             )
             
             formatted = []
-            seen_urls = set()  # Track unique URLs to avoid duplicates
+            seen_urls = set()
             if results['documents'] and results['documents'][0]:
                 for i in range(len(results['documents'][0])):
+                    similarity = 1 - results['distances'][0][i]
+                    # Filter out very poor matches (< 0.1 similarity)
+                    if similarity < 0.1:
+                        continue
+                        
                     url = results['metadatas'][0][i].get('url', '')
-                    if url not in seen_urls:  # Only add if URL not seen before
+                    if url not in seen_urls:
                         seen_urls.add(url)
                         formatted.append({
                             "content": results['documents'][0][i],
                             "metadata": results['metadatas'][0][i],
-                            "similarity": 1 - results['distances'][0][i]
+                            "similarity": similarity
                         })
-                        if len(formatted) >= n_results:  # Stop when we have enough unique results
+                        if len(formatted) >= n_results:
                             break
             return formatted
         except Exception as e:

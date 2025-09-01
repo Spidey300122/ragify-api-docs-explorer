@@ -55,7 +55,7 @@ class APIDocsScraper:
     
     def _get_source(self, url: str) -> str:
         domain = urlparse(url).netloc.lower()
-        if 'stripe' in domain: return 'Stripe API'
+        if 'anthropic' in domain: return 'Claude API'
+        elif 'google' in domain or 'ai.google.dev' in domain: return 'Gemini API'
         elif 'github' in domain: return 'GitHub API'
-        elif 'twilio' in domain: return 'Twilio API'
         return domain

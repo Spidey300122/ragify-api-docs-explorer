@@ -1,7 +1,3 @@
-
-__import__('pysqlite3')
-import sys
-sys.modules['sqlite3'] = sys.modules.pop('pysqlite3')
 import streamlit as st
 import sys
 import os
@@ -68,7 +64,7 @@ def load_docs():
         progress.progress(0.25)
         
         status.text("📋 Collecting documentation...")
-        urls = [url for urls_list in API_DOCS_URLS.values() for url in urls_list[:2]]
+        urls = [url for urls_list in API_DOCS_URLS.values() for url in urls_list]  # Fixed: removed [:2] limit
         progress.progress(0.5)
         
         status.text(f"📖 Processing {len(urls)} pages...")
@@ -109,10 +105,10 @@ def main():
     st.markdown('''
     <div class="main-header">
         <h1>🚀 RAGify API Docs Explorer</h1>
-        <p><strong>Ask questions about API documentation (no need to read those boring API docs anymore! 🎉)</strong><br>
-        💳 <strong>Stripe:</strong> Payments, subscriptions, customers | 
-        🐙 <strong>GitHub:</strong> Repos, webhooks, authentication | 
-        📱 <strong>Twilio:</strong> SMS, voice calls, messaging<br>
+        <p><strong>Ask questions about API documentation (Claude, Gemini, GitHub integration help!)</strong><br>
+        🟡 <strong>Anthropic:</strong> Messages, Streaming, System Prompts, Tool Use | 
+        🔵 <strong>Google:</strong> Gemini Generate, Chat, Embeddings, Safety Settings | 
+        ⚫ <strong>GitHub:</strong> Repos, Authentication, Issues, Users<br>
         <em>📋 Steps: 1️⃣ Create Groq key → 2️⃣ Press Enter & "Load Documentation" → 3️⃣ Wait ~30 sec → 4️⃣ Ready to go! 🔥</em></p>
     </div>
     ''', unsafe_allow_html=True)
@@ -126,7 +122,7 @@ def main():
             os.environ["GROQ_API_KEY"] = groq_key
             st.success("🚀 Connected!")
         
-        if st.button("📥 Load Documentation", type="primary", disabled=not groq_key):
+        if st.button("🔥 Load Documentation", type="primary", disabled=not groq_key):
             if load_docs():
                 st.rerun()
         
@@ -150,8 +146,8 @@ def main():
     
     # Chat interface
     st.subheader("💬 Ask Your Question")
-    query = st.text_input("", value=st.session_state.current_query, 
-                         placeholder="e.g., How do i push in a GitHub repo?")
+    query = st.text_input("Enter your question", value=st.session_state.current_query,  # Fixed: added proper label
+                         placeholder="e.g., How do I create an S3 bucket using AWS API?")
     
     if query and query != st.session_state.get('last_processed_query', ''):
         st.session_state.last_processed_query = query
@@ -175,12 +171,12 @@ def main():
         st.markdown("### ⚡ Quick Questions")
         
         questions = [
-            ("💳 Stripe Payments", "How do I create a payment intent with Stripe? Show code examples."),
-            ("📱 Twilio SMS", "How do I send SMS with Twilio API? Include authentication."),
-            ("🐙 GitHub Repos", "How do I list repositories using GitHub API?"),
-            ("🔗 GitHub Webhooks", "How do I set up GitHub webhooks? What events are available?"),
-            ("📞 Twilio Voice", "How do I make voice calls using Twilio API?"),
-            ("💰 Stripe Subscriptions", "How do I create subscriptions with Stripe API?")
+            ("🟡 Claude Messages", "How does the Anthropic Messages API work with system prompts and role structure?"),
+            ("🔵 Gemini Embeddings", "What is the Google embed-content API, explain with task type and models?"),
+            ("⚫ GitHub Repos", "How do I create and manage repositories using GitHub REST API with authentication?"),
+            ("🟡 Claude Tool Use", "How to implement function calling and tool use with Claude API including JSON schema?"),
+            ("🔵 Gemini Safety", "How do I configure safety settings and content filtering in Gemini API?"),
+            ("⚫ GitHub Issues", "How to create, update and manage issues using GitHub API with labels and assignees?")
         ]
         
         cols = st.columns(3)
