@@ -97,34 +97,32 @@ st.markdown("""<style>
     font-size: 18px;
 }
 
-/* ENHANCED SIDEBAR STYLING */
+/* BRIGHT COMPLEMENTARY SIDEBAR STYLING */
 [data-testid="stSidebar"] {
-    background: linear-gradient(180deg, #1a1a2e 0%, #16213e 25%, #0f3460 50%, #533483 75%, #7209b7 100%) !important;
-    border-right: 3px solid rgba(255,255,255,0.1) !important;
+    background: linear-gradient(180deg, #ffecd2 0%, #fcb69f 25%, #ff9a9e 50%, #fecfef 75%, #fecfef 100%) !important;
+    border-right: 3px solid rgba(255,255,255,0.4) !important;
+    position: relative !important;
 }
 
 [data-testid="stSidebar"]::before {
     content: '';
     position: absolute;
     top: 0; left: 0; right: 0; bottom: 0;
-    background: linear-gradient(45deg, transparent 30%, rgba(255,255,255,0.05) 50%, transparent 70%);
-    animation: sidebarShimmer 8s infinite;
+    background: rgba(255,255,255,0.1);
+    backdrop-filter: blur(5px);
     pointer-events: none;
-}
-
-@keyframes sidebarShimmer {
-    0% { transform: translateX(-100%); }
-    100% { transform: translateX(100%); }
 }
 
 [data-testid="stSidebar"] > div {
     background: transparent !important;
     padding: 2rem 1.5rem !important;
+    position: relative;
+    z-index: 1;
 }
 
-/* Sidebar Headers with Gradient Text */
+/* Sidebar Headers with Vibrant Colors */
 [data-testid="stSidebar"] h3 {
-    background: linear-gradient(135deg, #00f5ff, #ff00ff, #00ff00) !important;
+    background: linear-gradient(135deg, #667eea, #764ba2) !important;
     -webkit-background-clip: text !important;
     -webkit-text-fill-color: transparent !important;
     background-clip: text !important;
@@ -132,30 +130,31 @@ st.markdown("""<style>
     font-size: 1.3rem !important;
     margin-bottom: 1.5rem !important;
     text-align: center !important;
-    text-shadow: 0 0 20px rgba(0, 245, 255, 0.3);
+    text-shadow: none !important;
 }
 
-/* Sidebar Text with Better Contrast */
+/* Sidebar Text with Dark Colors for Better Readability */
 [data-testid="stSidebar"] p,
 [data-testid="stSidebar"] li,
 [data-testid="stSidebar"] span,
 [data-testid="stSidebar"] div {
-    color: #e2e8f0 !important;
-    font-weight: 500 !important;
-    text-shadow: 0 1px 3px rgba(0,0,0,0.5);
+    color: #2d3748 !important;
+    font-weight: 600 !important;
+    text-shadow: none !important;
 }
 
 /* Sidebar Strong Text */
 [data-testid="stSidebar"] strong {
-    color: #00f5ff !important;
-    text-shadow: 0 0 10px rgba(0, 245, 255, 0.5);
+    color: #667eea !important;
+    font-weight: 700 !important;
+    text-shadow: none !important;
 }
 
 /* Enhanced Sidebar Buttons */
 [data-testid="stSidebar"] .stButton > button {
     background: linear-gradient(135deg, #667eea, #764ba2) !important;
     color: white !important;
-    border: 2px solid rgba(255,255,255,0.2) !important;
+    border: 2px solid rgba(255,255,255,0.3) !important;
     border-radius: 12px !important;
     padding: 1rem !important;
     font-weight: 600 !important;
@@ -171,15 +170,15 @@ st.markdown("""<style>
     background: linear-gradient(135deg, #ff6b6b, #4ecdc4) !important;
     transform: translateY(-3px) !important;
     box-shadow: 0 12px 35px rgba(255, 107, 107, 0.4) !important;
-    border-color: rgba(255,255,255,0.4) !important;
+    border-color: rgba(255,255,255,0.5) !important;
 }
 
 /* Sidebar Input Fields */
 [data-testid="stSidebar"] .stTextInput input {
-    background: rgba(255,255,255,0.1) !important;
+    background: rgba(255,255,255,0.8) !important;
     backdrop-filter: blur(10px) !important;
-    color: #e2e8f0 !important;
-    border: 2px solid rgba(0, 245, 255, 0.3) !important;
+    color: #2d3748 !important;
+    border: 2px solid rgba(102, 126, 234, 0.3) !important;
     border-radius: 10px !important;
     padding: 0.75rem !important;
     font-weight: 500 !important;
@@ -187,43 +186,43 @@ st.markdown("""<style>
 }
 
 [data-testid="stSidebar"] .stTextInput input:focus {
-    border-color: #00f5ff !important;
-    box-shadow: 0 0 20px rgba(0, 245, 255, 0.3) !important;
-    background: rgba(255,255,255,0.15) !important;
+    border-color: #667eea !important;
+    box-shadow: 0 0 20px rgba(102, 126, 234, 0.3) !important;
+    background: rgba(255,255,255,0.9) !important;
 }
 
 [data-testid="stSidebar"] .stTextInput input::placeholder {
-    color: rgba(226, 232, 240, 0.6) !important;
+    color: rgba(45, 55, 72, 0.6) !important;
 }
 
 /* Enhanced Alert Boxes in Sidebar */
 [data-testid="stSidebar"] .stSuccess > div {
-    background: linear-gradient(135deg, #00f260, #0575e6) !important;
+    background: linear-gradient(135deg, #48bb78, #38a169) !important;
     color: white !important;
     border-radius: 10px !important;
     padding: 1rem !important;
-    border: 2px solid rgba(255,255,255,0.2) !important;
-    box-shadow: 0 8px 25px rgba(0, 242, 96, 0.3) !important;
+    border: 2px solid rgba(255,255,255,0.3) !important;
+    box-shadow: 0 8px 25px rgba(72, 187, 120, 0.3) !important;
     font-weight: 600 !important;
 }
 
 [data-testid="stSidebar"] .stWarning > div {
-    background: linear-gradient(135deg, #ff9a56, #ff6b6b) !important;
+    background: linear-gradient(135deg, #ed8936, #dd6b20) !important;
     color: white !important;
     border-radius: 10px !important;
     padding: 1rem !important;
-    border: 2px solid rgba(255,255,255,0.2) !important;
-    box-shadow: 0 8px 25px rgba(255, 154, 86, 0.3) !important;
+    border: 2px solid rgba(255,255,255,0.3) !important;
+    box-shadow: 0 8px 25px rgba(237, 137, 54, 0.3) !important;
     font-weight: 600 !important;
 }
 
 [data-testid="stSidebar"] .stInfo > div {
-    background: linear-gradient(135deg, #667eea, #764ba2) !important;
+    background: linear-gradient(135deg, #4299e1, #3182ce) !important;
     color: white !important;
     border-radius: 10px !important;
     padding: 1rem !important;
-    border: 2px solid rgba(255,255,255,0.2) !important;
-    box-shadow: 0 8px 25px rgba(102, 126, 234, 0.3) !important;
+    border: 2px solid rgba(255,255,255,0.3) !important;
+    box-shadow: 0 8px 25px rgba(66, 153, 225, 0.3) !important;
     font-weight: 600 !important;
 }
 
@@ -231,9 +230,9 @@ st.markdown("""<style>
 [data-testid="stSidebar"] hr {
     border: none !important;
     height: 2px !important;
-    background: linear-gradient(90deg, transparent, #00f5ff, transparent) !important;
+    background: linear-gradient(90deg, transparent, #667eea, transparent) !important;
     margin: 2rem 0 !important;
-    box-shadow: 0 0 10px rgba(0, 245, 255, 0.3) !important;
+    box-shadow: 0 0 10px rgba(102, 126, 234, 0.3) !important;
 }
 
 /* Sidebar Markdown Lists */
@@ -248,11 +247,10 @@ st.markdown("""<style>
 
 [data-testid="stSidebar"] li::before {
     content: '▸' !important;
-    color: #00f5ff !important;
+    color: #667eea !important;
     font-weight: bold !important;
     position: absolute !important;
     left: -1rem !important;
-    text-shadow: 0 0 5px rgba(0, 245, 255, 0.5) !important;
 }
 
 /* Headers - Rainbow text */
