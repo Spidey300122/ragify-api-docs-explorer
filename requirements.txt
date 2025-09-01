@@ -4,3 +4,4 @@ chromadb
 beautifulsoup4
 requests
 sentence-transformers
+pysqlite3-binary>=0.5.0
