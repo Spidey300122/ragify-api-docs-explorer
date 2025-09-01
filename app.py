@@ -5,74 +5,237 @@ sys.path.append(os.path.dirname(os.path.abspath(__file__)))
 
 st.set_page_config(page_title="🚀 Smart API Docs Assistant", page_icon="🚀", layout="wide")
 
-# Vibrant, colorful styling
+# Ultra Vibrant Theme
 st.markdown("""<style>
-/* Main app background with gradient */
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap');
+
+/* Main app background - Electric gradient */
 .stApp {
-    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    background: linear-gradient(45deg, #FF6B6B, #4ECDC4, #45B7D1, #96CEB4, #FFEAA7, #DDA0DD, #98D8C8);
+    background-size: 400% 400%;
+    animation: gradientShift 15s ease infinite;
+    font-family: 'Inter', sans-serif;
 }
 
-/* Main content area */
+@keyframes gradientShift {
+    0% { background-position: 0% 50%; }
+    50% { background-position: 100% 50%; }
+    100% { background-position: 0% 50%; }
+}
+
+/* Main content container - Glassmorphism */
 .main .block-container {
-    background: rgba(255, 255, 255, 0.95);
-    border-radius: 15px;
-    padding: 2rem;
+    background: rgba(255, 255, 255, 0.15);
+    backdrop-filter: blur(20px);
+    border: 2px solid rgba(255, 255, 255, 0.2);
+    border-radius: 25px;
+    padding: 2.5rem;
     margin: 1rem;
-    box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+    box-shadow: 0 20px 60px rgba(0,0,0,0.2);
 }
 
+/* Chat messages - Neon style */
 .chat-message {
-    padding: 1.5rem; border-radius: 12px; margin: 1rem 0; 
-    background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
-    color: white; border: none;
-    box-shadow: 0 5px 15px rgba(240, 147, 251, 0.4);
-}
-
-.stButton > button {
-    width: 100%; margin: 0.3rem 0; border-radius: 8px;
-    background: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%);
-    color: white; border: none; 
-    padding: 0.8rem; font-weight: 600;
-    transition: all 0.3s ease;
-}
-.stButton > button:hover {
-    background: linear-gradient(135deg, #43e97b 0%, #38f9d7 100%);
-    transform: translateY(-2px);
-    box-shadow: 0 5px 15px rgba(67, 233, 123, 0.4);
-}
-
-.status-success {
-    background: linear-gradient(135deg, #84fab0 0%, #8fd3f4 100%);
-    color: #1a365d; padding: 1rem; 
-    border-radius: 8px; text-align: center; font-weight: 600;
-    box-shadow: 0 4px 12px rgba(132, 250, 176, 0.3);
-}
-
-/* Sidebar styling */
-.css-1d391kg {
-    background: linear-gradient(180deg, #a8edea 0%, #fed6e3 100%);
-}
-
-/* Headers with gradients */
-h1, h2, h3 {
+    padding: 2rem; 
+    border-radius: 20px; 
+    margin: 1.5rem 0; 
     background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
-    background-clip: text;
+    color: white; 
+    border: 2px solid rgba(255,255,255,0.3);
+    box-shadow: 0 10px 30px rgba(102, 126, 234, 0.4);
+    position: relative;
+    overflow: hidden;
 }
 
-/* Info boxes */
+.chat-message::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 0; right: 0; bottom: 0;
+    background: linear-gradient(45deg, transparent 30%, rgba(255,255,255,0.1) 50%, transparent 70%);
+    animation: shimmer 3s infinite;
+}
+
+@keyframes shimmer {
+    0% { transform: translateX(-100%); }
+    100% { transform: translateX(100%); }
+}
+
+/* Buttons - Electric neon */
+.stButton > button {
+    width: 100% !important; 
+    margin: 0.5rem 0 !important; 
+    border-radius: 15px !important;
+    background: linear-gradient(135deg, #667eea, #764ba2) !important;
+    color: white !important; 
+    border: 2px solid rgba(255,255,255,0.3) !important; 
+    padding: 1rem !important; 
+    font-weight: 700 !important;
+    font-size: 16px !important;
+    transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275) !important;
+    box-shadow: 0 8px 25px rgba(102, 126, 234, 0.3) !important;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+}
+
+.stButton > button:hover {
+    background: linear-gradient(135deg, #FF6B6B, #4ECDC4) !important;
+    transform: translateY(-5px) scale(1.02) !important;
+    box-shadow: 0 15px 35px rgba(255, 107, 107, 0.4) !important;
+    border-color: rgba(255,255,255,0.5) !important;
+}
+
+/* Success status - Glowing */
+.status-success {
+    background: linear-gradient(135deg, #00F260, #0575E6);
+    color: white; 
+    padding: 1.5rem; 
+    border-radius: 15px; 
+    text-align: center; 
+    font-weight: 700;
+    box-shadow: 0 10px 30px rgba(0, 242, 96, 0.4);
+    border: 2px solid rgba(255,255,255,0.3);
+    font-size: 18px;
+}
+
+/* Sidebar - Cosmic gradient */
+.css-1d391kg {
+    background: linear-gradient(180deg, #667eea 0%, #764ba2 50%, #667eea 100%) !important;
+    border-right: 3px solid rgba(255,255,255,0.2) !important;
+}
+
+/* Headers - Rainbow text */
+h1 {
+    background: linear-gradient(45deg, #FF6B6B, #4ECDC4, #45B7D1, #96CEB4, #FFEAA7) !important;
+    -webkit-background-clip: text !important;
+    -webkit-text-fill-color: transparent !important;
+    background-clip: text !important;
+    font-weight: 800 !important;
+    font-size: 3rem !important;
+    text-align: center !important;
+    margin-bottom: 0 !important;
+}
+
+h2, h3 {
+    background: linear-gradient(135deg, #667eea, #764ba2) !important;
+    -webkit-background-clip: text !important;
+    -webkit-text-fill-color: transparent !important;
+    background-clip: text !important;
+    font-weight: 700 !important;
+}
+
+/* Info boxes - Holographic */
 .stInfo {
-    background: linear-gradient(135deg, #ffecd2 0%, #fcb69f 100%);
-    border: none;
-    border-radius: 8px;
+    background: linear-gradient(135deg, #667eea, #764ba2) !important;
+    border: 2px solid rgba(255,255,255,0.3) !important;
+    border-radius: 15px !important;
+    color: white !important;
+    box-shadow: 0 10px 25px rgba(102, 126, 234, 0.3) !important;
 }
 
-/* Warning boxes */
+/* Warning boxes - Neon orange */
 .stWarning {
-    background: linear-gradient(135deg, #fdbb2d 0%, #22c1c3 100%);
-    border: none;
-    border-radius: 8px;
+    background: linear-gradient(135deg, #FF6B6B, #FFE66D) !important;
+    border: 2px solid rgba(255,255,255,0.3) !important;
+    border-radius: 15px !important;
+    color: white !important;
+    box-shadow: 0 10px 25px rgba(255, 107, 107, 0.3) !important;
+}
+
+/* Text inputs - Glowing */
+.stTextInput > div > div > input {
+    background: rgba(255,255,255,0.15) !important;
+    backdrop-filter: blur(10px) !important;
+    border: 2px solid rgba(255,255,255,0.3) !important;
+    border-radius: 15px !important;
+    color: white !important;
+    font-weight: 600 !important;
+    padding: 1rem !important;
+    font-size: 16px !important;
+}
+
+.stTextInput > div > div > input:focus {
+    border-color: #4ECDC4 !important;
+    box-shadow: 0 0 20px rgba(78, 205, 196, 0.5) !important;
+}
+
+/* Custom response header */
+.response-header {
+    background: linear-gradient(135deg, #667eea, #764ba2);
+    color: white;
+    padding: 1rem 2rem;
+    border-radius: 15px 15px 0 0;
+    font-size: 1.2rem;
+    font-weight: 700;
+    text-align: center;
+    border: 2px solid rgba(255,255,255,0.3);
+    border-bottom: none;
+}
+
+/* Sources section */
+.sources-section {
+    background: rgba(255,255,255,0.1);
+    backdrop-filter: blur(10px);
+    padding: 1.5rem;
+    border-radius: 15px;
+    border: 2px solid rgba(255,255,255,0.2);
+    margin-top: 1rem;
+}
+
+/* Expander styling */
+.streamlit-expanderHeader {
+    background: linear-gradient(135deg, #4ECDC4, #45B7D1) !important;
+    color: white !important;
+    border-radius: 10px !important;
+    font-weight: 600 !important;
+    border: 2px solid rgba(255,255,255,0.3) !important;
+}
+
+/* Progress bar */
+.stProgress > div > div > div {
+    background: linear-gradient(135deg, #667eea, #764ba2) !important;
+}
+
+/* Columns for API info */
+.api-column {
+    background: rgba(255,255,255,0.1);
+    backdrop-filter: blur(10px);
+    padding: 1.5rem;
+    border-radius: 15px;
+    border: 2px solid rgba(255,255,255,0.2);
+    margin: 0.5rem;
+    color: white;
+    font-weight: 600;
+}
+
+/* Markdown styling */
+p, li {
+    color: rgba(255,255,255,0.9) !important;
+    font-weight: 500 !important;
+}
+
+/* Selection highlighting */
+::selection {
+    background: rgba(78, 205, 196, 0.3);
+    color: white;
+}
+
+/* Scrollbar styling */
+::-webkit-scrollbar {
+    width: 12px;
+}
+
+::-webkit-scrollbar-track {
+    background: rgba(255,255,255,0.1);
+    border-radius: 10px;
+}
+
+::-webkit-scrollbar-thumb {
+    background: linear-gradient(135deg, #667eea, #764ba2);
+    border-radius: 10px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+    background: linear-gradient(135deg, #4ECDC4, #45B7D1);
 }
 </style>""", unsafe_allow_html=True)
 
@@ -140,17 +303,44 @@ def main():
     st.markdown("### AI-Powered API Documentation Assistant")
     st.markdown("Get instant answers from **Claude**, **Gemini** & **GitHub** documentation using advanced RAG technology")
     
-    # Simple brand display with comprehensive coverage
+    # Vibrant API coverage display with glassmorphism
     col1, col2, col3 = st.columns(3)
     with col1:
-        st.markdown("**🟠 Anthropic Claude**")
-        st.markdown("• API Messages\n• Messages Streaming\n• Tool Use & Function Calling\n• Prompt Engineering")
+        st.markdown("""
+        <div class="api-column">
+            <h3 style="margin-top:0; text-align:center;">🟠 Anthropic Claude</h3>
+            <ul style="list-style:none; padding:0;">
+                <li>🔸 API Messages</li>
+                <li>🔸 Messages Streaming</li>
+                <li>🔸 Tool Use & Function Calling</li>
+                <li>🔸 Prompt Engineering</li>
+            </ul>
+        </div>
+        """, unsafe_allow_html=True)
     with col2:
-        st.markdown("**🔵 Google Gemini**") 
-        st.markdown("• Generate Content API\n• Embeddings\n• Safety Settings\n• Function Calling")
+        st.markdown("""
+        <div class="api-column">
+            <h3 style="margin-top:0; text-align:center;">🔵 Google Gemini</h3>
+            <ul style="list-style:none; padding:0;">
+                <li>🔹 Generate Content API</li>
+                <li>🔹 Embeddings</li>
+                <li>🔹 Safety Settings</li>
+                <li>🔹 Function Calling</li>
+            </ul>
+        </div>
+        """, unsafe_allow_html=True)
     with col3:
-        st.markdown("**⚫ GitHub API**")
-        st.markdown("• Repositories\n• Authentication\n• Issues Management\n• Users")
+        st.markdown("""
+        <div class="api-column">
+            <h3 style="margin-top:0; text-align:center;">⚫ GitHub API</h3>
+            <ul style="list-style:none; padding:0;">
+                <li>⚪ Repositories</li>
+                <li>⚪ Authentication</li>
+                <li>⚪ Issues Management</li>
+                <li>⚪ Users</li>
+            </ul>
+        </div>
+        """, unsafe_allow_html=True)
     
     st.markdown("---")
     st.info("**Quick Start:** 1️⃣ Add Groq API Key → 2️⃣ Load Documentation → 3️⃣ Ask Questions!")
@@ -170,7 +360,7 @@ def main():
             os.environ["GROQ_API_KEY"] = groq_key
             st.success("🚀 API Key Connected!")
         
-        if st.button("📥 Load Documentation", type="primary", disabled=not groq_key):
+        if st.button("🔥 Load Documentation", type="primary", disabled=not groq_key):
             if load_docs():
                 st.rerun()
         
