@@ -177,6 +177,14 @@ class RAGifyUI:
             color: white !important;
         }
 
+        /* Force white text for ALL sidebar buttons */
+        [data-testid="stSidebar"] .stButton > button,
+        [data-testid="stSidebar"] .stButton > button:hover,
+        [data-testid="stSidebar"] .stButton > button:active,
+        [data-testid="stSidebar"] .stButton > button:focus {
+            color: white !important;
+        }
+
         /* Sidebar Input Fields */
         [data-testid="stSidebar"] .stTextInput input {
             background: white !important;
@@ -284,13 +292,13 @@ class RAGifyUI:
             font-weight: 600;
         }
 
-        /* Text inputs - Glowing */
+        /* Text inputs - Main interface with BLACK text for better readability */
         .stTextInput > div > div > input {
-            background: rgba(255,255,255,0.15) !important;
+            background: rgba(255,255,255,0.9) !important;
             backdrop-filter: blur(10px) !important;
             border: 2px solid rgba(255,255,255,0.3) !important;
             border-radius: 15px !important;
-            color: white !important;
+            color: #333333 !important;
             font-weight: 600 !important;
             padding: 1rem !important;
             font-size: 16px !important;
@@ -299,6 +307,14 @@ class RAGifyUI:
         .stTextInput > div > div > input:focus {
             border-color: #4ECDC4 !important;
             box-shadow: 0 0 20px rgba(78, 205, 196, 0.5) !important;
+            background: rgba(255,255,255,0.95) !important;
+            color: #333333 !important;
+        }
+
+        /* Placeholder text styling */
+        .stTextInput > div > div > input::placeholder {
+            color: #666666 !important;
+            opacity: 0.8 !important;
         }
 
         /* Expander styling */
