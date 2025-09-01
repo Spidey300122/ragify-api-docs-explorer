@@ -5,7 +5,7 @@ sys.path.append(os.path.dirname(os.path.abspath(__file__)))
 
 st.set_page_config(page_title="🚀 Smart API Docs Assistant", page_icon="🚀", layout="wide")
 
-# Ultra Vibrant Theme
+# Ultra Vibrant Theme with Enhanced Sidebar
 st.markdown("""<style>
 @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap');
 
@@ -97,68 +97,162 @@ st.markdown("""<style>
     font-size: 18px;
 }
 
-/* Simple, clean sidebar styling */
+/* ENHANCED SIDEBAR STYLING */
 [data-testid="stSidebar"] {
-    background: linear-gradient(180deg, #2c3e50 0%, #34495e 100%) !important;
+    background: linear-gradient(180deg, #1a1a2e 0%, #16213e 25%, #0f3460 50%, #533483 75%, #7209b7 100%) !important;
+    border-right: 3px solid rgba(255,255,255,0.1) !important;
+}
+
+[data-testid="stSidebar"]::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 0; right: 0; bottom: 0;
+    background: linear-gradient(45deg, transparent 30%, rgba(255,255,255,0.05) 50%, transparent 70%);
+    animation: sidebarShimmer 8s infinite;
+    pointer-events: none;
+}
+
+@keyframes sidebarShimmer {
+    0% { transform: translateX(-100%); }
+    100% { transform: translateX(100%); }
 }
 
 [data-testid="stSidebar"] > div {
     background: transparent !important;
-    padding: 1rem !important;
+    padding: 2rem 1.5rem !important;
 }
 
-/* Simple white text for readability */
+/* Sidebar Headers with Gradient Text */
 [data-testid="stSidebar"] h3 {
-    color: #ecf0f1 !important;
-    font-weight: 600 !important;
-    margin-bottom: 1rem !important;
+    background: linear-gradient(135deg, #00f5ff, #ff00ff, #00ff00) !important;
+    -webkit-background-clip: text !important;
+    -webkit-text-fill-color: transparent !important;
+    background-clip: text !important;
+    font-weight: 700 !important;
+    font-size: 1.3rem !important;
+    margin-bottom: 1.5rem !important;
+    text-align: center !important;
+    text-shadow: 0 0 20px rgba(0, 245, 255, 0.3);
 }
 
+/* Sidebar Text with Better Contrast */
 [data-testid="stSidebar"] p,
 [data-testid="stSidebar"] li,
-[data-testid="stSidebar"] span {
-    color: #bdc3c7 !important;
+[data-testid="stSidebar"] span,
+[data-testid="stSidebar"] div {
+    color: #e2e8f0 !important;
+    font-weight: 500 !important;
+    text-shadow: 0 1px 3px rgba(0,0,0,0.5);
 }
 
-/* Clean button styling */
+/* Sidebar Strong Text */
+[data-testid="stSidebar"] strong {
+    color: #00f5ff !important;
+    text-shadow: 0 0 10px rgba(0, 245, 255, 0.5);
+}
+
+/* Enhanced Sidebar Buttons */
 [data-testid="stSidebar"] .stButton > button {
-    background: #3498db !important;
+    background: linear-gradient(135deg, #667eea, #764ba2) !important;
     color: white !important;
-    border: none !important;
-    border-radius: 8px !important;
-    padding: 0.75rem !important;
+    border: 2px solid rgba(255,255,255,0.2) !important;
+    border-radius: 12px !important;
+    padding: 1rem !important;
     font-weight: 600 !important;
     width: 100% !important;
-    margin: 0.5rem 0 !important;
+    margin: 0.75rem 0 !important;
+    transition: all 0.3s ease !important;
+    box-shadow: 0 8px 25px rgba(102, 126, 234, 0.3) !important;
+    text-transform: none !important;
+    letter-spacing: 0.5px !important;
 }
 
 [data-testid="stSidebar"] .stButton > button:hover {
-    background: #2980b9 !important;
-    transform: translateY(-1px) !important;
+    background: linear-gradient(135deg, #ff6b6b, #4ecdc4) !important;
+    transform: translateY(-3px) !important;
+    box-shadow: 0 12px 35px rgba(255, 107, 107, 0.4) !important;
+    border-color: rgba(255,255,255,0.4) !important;
 }
 
-/* Input styling */
+/* Sidebar Input Fields */
 [data-testid="stSidebar"] .stTextInput input {
-    background: #34495e !important;
-    color: white !important;
-    border: 1px solid #3498db !important;
-    border-radius: 6px !important;
-    padding: 0.5rem !important;
+    background: rgba(255,255,255,0.1) !important;
+    backdrop-filter: blur(10px) !important;
+    color: #e2e8f0 !important;
+    border: 2px solid rgba(0, 245, 255, 0.3) !important;
+    border-radius: 10px !important;
+    padding: 0.75rem !important;
+    font-weight: 500 !important;
+    transition: all 0.3s ease !important;
 }
 
-/* Alert boxes */
+[data-testid="stSidebar"] .stTextInput input:focus {
+    border-color: #00f5ff !important;
+    box-shadow: 0 0 20px rgba(0, 245, 255, 0.3) !important;
+    background: rgba(255,255,255,0.15) !important;
+}
+
+[data-testid="stSidebar"] .stTextInput input::placeholder {
+    color: rgba(226, 232, 240, 0.6) !important;
+}
+
+/* Enhanced Alert Boxes in Sidebar */
 [data-testid="stSidebar"] .stSuccess > div {
-    background: #27ae60 !important;
+    background: linear-gradient(135deg, #00f260, #0575e6) !important;
     color: white !important;
-    border-radius: 6px !important;
-    padding: 0.75rem !important;
+    border-radius: 10px !important;
+    padding: 1rem !important;
+    border: 2px solid rgba(255,255,255,0.2) !important;
+    box-shadow: 0 8px 25px rgba(0, 242, 96, 0.3) !important;
+    font-weight: 600 !important;
 }
 
 [data-testid="stSidebar"] .stWarning > div {
-    background: #f39c12 !important;
+    background: linear-gradient(135deg, #ff9a56, #ff6b6b) !important;
     color: white !important;
-    border-radius: 6px !important;
-    padding: 0.75rem !important;
+    border-radius: 10px !important;
+    padding: 1rem !important;
+    border: 2px solid rgba(255,255,255,0.2) !important;
+    box-shadow: 0 8px 25px rgba(255, 154, 86, 0.3) !important;
+    font-weight: 600 !important;
+}
+
+[data-testid="stSidebar"] .stInfo > div {
+    background: linear-gradient(135deg, #667eea, #764ba2) !important;
+    color: white !important;
+    border-radius: 10px !important;
+    padding: 1rem !important;
+    border: 2px solid rgba(255,255,255,0.2) !important;
+    box-shadow: 0 8px 25px rgba(102, 126, 234, 0.3) !important;
+    font-weight: 600 !important;
+}
+
+/* Sidebar Section Dividers */
+[data-testid="stSidebar"] hr {
+    border: none !important;
+    height: 2px !important;
+    background: linear-gradient(90deg, transparent, #00f5ff, transparent) !important;
+    margin: 2rem 0 !important;
+    box-shadow: 0 0 10px rgba(0, 245, 255, 0.3) !important;
+}
+
+/* Sidebar Markdown Lists */
+[data-testid="stSidebar"] ul {
+    padding-left: 1rem !important;
+}
+
+[data-testid="stSidebar"] li {
+    margin: 0.5rem 0 !important;
+    position: relative !important;
+}
+
+[data-testid="stSidebar"] li::before {
+    content: '▸' !important;
+    color: #00f5ff !important;
+    font-weight: bold !important;
+    position: absolute !important;
+    left: -1rem !important;
+    text-shadow: 0 0 5px rgba(0, 245, 255, 0.5) !important;
 }
 
 /* Headers - Rainbow text */
@@ -366,7 +460,7 @@ def main():
     with col1:
         st.markdown("""
         <div class="api-column">
-            <h3 style="margin-top:0; text-align:center;">🟠 Anthropic Claude</h3>
+            <h3 style="margin-top:0; text-align:center;">🟡 Anthropic Claude</h3>
             <ul style="list-style:none; padding:0;">
                 <li>🔸 API Messages</li>
                 <li>🔸 Messages Streaming</li>
@@ -436,7 +530,7 @@ def main():
         # Enhanced API Coverage Info
         st.markdown("### 📚 Documentation Coverage")
         st.markdown("""
-        **🟠 Anthropic Claude:**
+        **🟡 Anthropic Claude:**
         - API Messages
         - Messages Streaming  
         - Tool Use & Function Calling
@@ -501,10 +595,10 @@ def main():
         st.markdown("### ⚡ Popular Questions")
         
         questions = [
-            ("🟠 Claude Messages API", "How does the Anthropic Messages API work with system prompts and role structure?"),
+            ("🟡 Claude Messages API", "How does the Anthropic Messages API work with system prompts and role structure?"),
             ("🔵 Gemini Content Generation", "What is the Google Gemini generate-content API and how do I use it?"),
             ("⚫ GitHub Repository Management", "How do I create and manage repositories using GitHub REST API with authentication?"),
-            ("🟠 Claude Tool Use", "How to implement function calling and tool use with Claude API including JSON schema?"),
+            ("🟡 Claude Tool Use", "How to implement function calling and tool use with Claude API including JSON schema?"),
             ("🔵 Gemini Safety Settings", "How do I configure safety settings and content filtering in Gemini API?"),
             ("⚫ GitHub Issues API", "How to create, update and manage issues using GitHub API with labels and assignees?")
         ]
