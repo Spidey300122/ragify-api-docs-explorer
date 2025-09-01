@@ -5,26 +5,74 @@ sys.path.append(os.path.dirname(os.path.abspath(__file__)))
 
 st.set_page_config(page_title="🚀 Smart API Docs Assistant", page_icon="🚀", layout="wide")
 
-# Clean, classic styling
+# Vibrant, colorful styling
 st.markdown("""<style>
+/* Main app background with gradient */
+.stApp {
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+}
+
+/* Main content area */
+.main .block-container {
+    background: rgba(255, 255, 255, 0.95);
+    border-radius: 15px;
+    padding: 2rem;
+    margin: 1rem;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+}
+
 .chat-message {
-    padding: 1.2rem; border-radius: 8px; margin: 1rem 0; 
-    background: #f8fafc; border-left: 4px solid #3b82f6; 
-    border: 1px solid #e2e8f0; color: #1e293b;
+    padding: 1.5rem; border-radius: 12px; margin: 1rem 0; 
+    background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
+    color: white; border: none;
+    box-shadow: 0 5px 15px rgba(240, 147, 251, 0.4);
 }
 
 .stButton > button {
-    width: 100%; margin: 0.2rem 0; border-radius: 6px;
-    background: #3b82f6; color: white; border: none; 
-    padding: 0.6rem; font-weight: 500;
+    width: 100%; margin: 0.3rem 0; border-radius: 8px;
+    background: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%);
+    color: white; border: none; 
+    padding: 0.8rem; font-weight: 600;
+    transition: all 0.3s ease;
 }
 .stButton > button:hover {
-    background: #2563eb;
+    background: linear-gradient(135deg, #43e97b 0%, #38f9d7 100%);
+    transform: translateY(-2px);
+    box-shadow: 0 5px 15px rgba(67, 233, 123, 0.4);
 }
 
 .status-success {
-    background: #10b981; color: white; padding: 0.8rem; 
-    border-radius: 6px; text-align: center; font-weight: 500;
+    background: linear-gradient(135deg, #84fab0 0%, #8fd3f4 100%);
+    color: #1a365d; padding: 1rem; 
+    border-radius: 8px; text-align: center; font-weight: 600;
+    box-shadow: 0 4px 12px rgba(132, 250, 176, 0.3);
+}
+
+/* Sidebar styling */
+.css-1d391kg {
+    background: linear-gradient(180deg, #a8edea 0%, #fed6e3 100%);
+}
+
+/* Headers with gradients */
+h1, h2, h3 {
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+}
+
+/* Info boxes */
+.stInfo {
+    background: linear-gradient(135deg, #ffecd2 0%, #fcb69f 100%);
+    border: none;
+    border-radius: 8px;
+}
+
+/* Warning boxes */
+.stWarning {
+    background: linear-gradient(135deg, #fdbb2d 0%, #22c1c3 100%);
+    border: none;
+    border-radius: 8px;
 }
 </style>""", unsafe_allow_html=True)
 
@@ -92,14 +140,17 @@ def main():
     st.markdown("### AI-Powered API Documentation Assistant")
     st.markdown("Get instant answers from **Claude**, **Gemini** & **GitHub** documentation using advanced RAG technology")
     
-    # Simple brand display
+    # Simple brand display with comprehensive coverage
     col1, col2, col3 = st.columns(3)
     with col1:
-        st.markdown("**🟠 Anthropic Claude**  \n*Messages, Streaming, Tool Use*")
+        st.markdown("**🟠 Anthropic Claude**")
+        st.markdown("• API Messages\n• Messages Streaming\n• Tool Use & Function Calling\n• Prompt Engineering")
     with col2:
-        st.markdown("**🔵 Google Gemini**  \n*Generation, Embeddings, Safety*") 
+        st.markdown("**🔵 Google Gemini**") 
+        st.markdown("• Generate Content API\n• Embeddings\n• Safety Settings\n• Function Calling")
     with col3:
-        st.markdown("**⚫ GitHub API**  \n*Repos, Issues, Authentication*")
+        st.markdown("**⚫ GitHub API**")
+        st.markdown("• Repositories\n• Authentication\n• Issues Management\n• Users")
     
     st.markdown("---")
     st.info("**Quick Start:** 1️⃣ Add Groq API Key → 2️⃣ Load Documentation → 3️⃣ Ask Questions!")
@@ -111,7 +162,7 @@ def main():
         groq_key = st.text_input(
             "🔑 Groq API Key:", 
             type="password", 
-            help="Get your free API key from console.groq.com",
+            help="Get your free API key from console.groq.com/keys",
             placeholder="gsk_..."
         )
         
@@ -134,28 +185,31 @@ def main():
             st.session_state.clear()
             st.rerun()
         
-        # API Coverage Info
-        st.markdown("### 📚 Coverage")
+        # Enhanced API Coverage Info
+        st.markdown("### 📚 Documentation Coverage")
         st.markdown("""
-        **🟠 Claude API:**
-        - Messages & Streaming
-        - System Prompts & Tool Use
+        **🟠 Anthropic Claude:**
+        - API Messages
+        - Messages Streaming  
+        - Tool Use & Function Calling
+        - Prompt Engineering Overview
+        
+        **🔵 Google Gemini:**
+        - Generate Content API
+        - Embeddings
+        - Safety Settings
         - Function Calling
         
-        **🔵 Gemini API:**
-        - Content Generation
-        - Embeddings & Safety
-        - Chat & Function Calling
-        
         **⚫ GitHub API:**
-        - Repositories & Authentication  
-        - Issues & Users
-        - REST API Endpoints
+        - Repositories
+        - Authentication
+        - Issues Management
+        - Users
         """)
     
     # Main interface
     if not groq_key:
-        st.info("🔑 **Get Started:** Obtain your free Groq API key from https://console.groq.com")
+        st.info("🔑 **Get Started:** Obtain your free Groq API key from https://console.groq.com/keys")
         return
     
     if not st.session_state.docs_loaded:
