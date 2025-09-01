@@ -97,68 +97,71 @@ st.markdown("""<style>
     font-size: 18px;
 }
 
-/* CLEAN GREY-WHITE SIDEBAR STYLING */
+/* ENHANCED LIGHT BLUE SIDEBAR STYLING */
 [data-testid="stSidebar"] {
-    background: linear-gradient(180deg, #ffffff 0%, #f8f9fa 25%, #e9ecef 50%, #dee2e6 75%, #ced4da 100%) !important;
-    border-right: 3px solid #17a2b8 !important;
+    background: linear-gradient(180deg, #e3f2fd 0%, #bbdefb 25%, #90caf9 50%, #64b5f6 75%, #42a5f5 100%) !important;
+    border-right: 3px solid #1976d2 !important;
     position: relative !important;
 }
 
 [data-testid="stSidebar"] > div {
     background: transparent !important;
-    padding: 2rem 1.5rem !important;
+    padding: 2.5rem 2rem !important;
     position: relative;
     z-index: 1;
 }
 
-/* Sidebar Headers with Cyan */
+/* Enhanced Sidebar Headers */
 [data-testid="stSidebar"] h3 {
-    color: #17a2b8 !important;
-    font-weight: 700 !important;
-    font-size: 1.3rem !important;
-    margin-bottom: 1.5rem !important;
+    color: #0d47a1 !important;
+    font-weight: 800 !important;
+    font-size: 1.6rem !important;
+    margin-bottom: 2rem !important;
     text-align: center !important;
     text-shadow: none !important;
+    letter-spacing: 0.5px !important;
 }
 
-/* Sidebar Text with Dark Colors */
+/* Sidebar Text with Dark Blue Colors */
 [data-testid="stSidebar"] p,
 [data-testid="stSidebar"] li,
 [data-testid="stSidebar"] span,
 [data-testid="stSidebar"] div {
-    color: #495057 !important;
+    color: #1a237e !important;
     font-weight: 600 !important;
     text-shadow: none !important;
 }
 
 /* Sidebar Strong Text */
 [data-testid="stSidebar"] strong {
-    color: #17a2b8 !important;
+    color: #0d47a1 !important;
     font-weight: 700 !important;
     text-shadow: none !important;
 }
 
-/* Enhanced Sidebar Buttons */
+/* Enhanced Sidebar Buttons with White Font */
 [data-testid="stSidebar"] .stButton > button {
-    background: #17a2b8 !important;
+    background: #1976d2 !important;
     color: white !important;
-    border: 2px solid #17a2b8 !important;
-    border-radius: 8px !important;
-    padding: 1rem !important;
-    font-weight: 600 !important;
+    border: 2px solid #1976d2 !important;
+    border-radius: 10px !important;
+    padding: 1.2rem !important;
+    font-weight: 700 !important;
     width: 100% !important;
-    margin: 0.75rem 0 !important;
+    margin: 1rem 0 !important;
     transition: all 0.3s ease !important;
-    box-shadow: 0 4px 15px rgba(23, 162, 184, 0.2) !important;
+    box-shadow: 0 6px 20px rgba(25, 118, 210, 0.3) !important;
     text-transform: none !important;
-    letter-spacing: 0.5px !important;
+    letter-spacing: 0.8px !important;
+    font-size: 15px !important;
 }
 
 [data-testid="stSidebar"] .stButton > button:hover {
-    background: #138496 !important;
-    border-color: #138496 !important;
-    transform: translateY(-2px) !important;
-    box-shadow: 0 6px 20px rgba(23, 162, 184, 0.3) !important;
+    background: #1565c0 !important;
+    border-color: #1565c0 !important;
+    transform: translateY(-3px) !important;
+    box-shadow: 0 8px 25px rgba(25, 118, 210, 0.4) !important;
+    color: white !important;
 }
 
 /* Sidebar Input Fields */
@@ -484,7 +487,7 @@ def main():
     
     # Enhanced sidebar
     with st.sidebar:
-        st.markdown("### ⚙️ Setup")
+        st.markdown("### ⚙️ Setup for your Groq LLM")
         
         groq_key = st.text_input(
             "🔑 Groq API Key:", 
