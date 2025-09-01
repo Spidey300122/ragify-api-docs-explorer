@@ -157,11 +157,11 @@ st.markdown("""<style>
 }
 
 [data-testid="stSidebar"] .stButton > button:hover {
-    background: #1565c0 !important;
-    border-color: #1565c0 !important;
-    transform: translateY(-3px) !important;
-    box-shadow: 0 8px 25px rgba(25, 118, 210, 0.4) !important;
-    color: white !important;
+    background: #138496 !important;
+    border-color: #138496 !important;
+    transform: translateY(-2px) !important;
+    box-shadow: 0 6px 20px rgba(23, 162, 184, 0.3) !important;
+    color: white !important;  /* <-- Add this line if it's missing */
 }
 
 /* Sidebar Input Fields */
