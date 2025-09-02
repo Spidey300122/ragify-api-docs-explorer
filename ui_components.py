@@ -347,14 +347,50 @@ class RAGifyUI:
         st.markdown("Get instant answers from **Claude**, **Gemini** & **GitHub** documentation using advanced RAG technology")
     
     def render_api_coverage(self):
-        """Render the API coverage display"""
+        """Render the API coverage display with emoji icons or font icons"""
+        col1, col2, col3 = st.columns(3)
+        
+        # OPTION 1: Using emoji icons (simplest fix)
+        with col1:
+            st.markdown("""
+            <div class="api-column">
+                <h3 style="margin-top:0; text-align:center;">
+                    🧠 Anthropic Claude
+                </h3>
+            </div>
+            """, unsafe_allow_html=True)
+        
+        with col2:
+            st.markdown("""
+            <div class="api-column">
+                <h3 style="margin-top:0; text-align:center;">
+                    💎 Google Gemini
+                </h3>
+            </div>
+            """, unsafe_allow_html=True)
+        
+        with col3:
+            st.markdown("""
+            <div class="api-column">
+                <h3 style="margin-top:0; text-align:center;">
+                    🐙 GitHub API
+                </h3>
+            </div>
+            """, unsafe_allow_html=True)
+    
+    def render_api_coverage_with_font_awesome(self):
+        """Alternative: Using Font Awesome icons from CDN"""
+        st.markdown("""
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+        """, unsafe_allow_html=True)
+        
         col1, col2, col3 = st.columns(3)
         
         with col1:
             st.markdown("""
             <div class="api-column">
                 <h3 style="margin-top:0; text-align:center;">
-                    <img src="./screenshots/image3.png" style="width:30px; height:30px; margin-right:10px; vertical-align:middle;">
+                    <i class="fas fa-robot" style="color:#FFA500; margin-right:10px;"></i>
                     Anthropic Claude
                 </h3>
             </div>
@@ -364,7 +400,7 @@ class RAGifyUI:
             st.markdown("""
             <div class="api-column">
                 <h3 style="margin-top:0; text-align:center;">
-                    <img src="./screenshots/image4.jpg" style="width:30px; height:30px; margin-right:10px; vertical-align:middle;">
+                    <i class="fab fa-google" style="color:#4285F4; margin-right:10px;"></i>
                     Google Gemini
                 </h3>
             </div>
@@ -374,11 +410,37 @@ class RAGifyUI:
             st.markdown("""
             <div class="api-column">
                 <h3 style="margin-top:0; text-align:center;">
-                    <img src="./screenshots/image5.png" style="width:30px; height:30px; margin-right:10px; vertical-align:middle;">
+                    <i class="fab fa-github" style="color:#333; margin-right:10px;"></i>
                     GitHub API
                 </h3>
             </div>
             """, unsafe_allow_html=True)
+    
+    def render_api_coverage_with_streamlit_images(self):
+        """Alternative: Using st.image() with online images"""
+        col1, col2, col3 = st.columns(3)
+        
+        # You can use publicly available logo URLs
+        with col1:
+            try:
+                st.image("https://upload.wikimedia.org/wikipedia/commons/7/7a/Anthropic_logo.svg", 
+                        width=50, caption="Anthropic Claude")
+            except:
+                st.markdown("🧠 **Anthropic Claude**")
+        
+        with col2:
+            try:
+                st.image("https://upload.wikimedia.org/wikipedia/commons/8/8a/Google_Gemini_logo.svg", 
+                        width=50, caption="Google Gemini")
+            except:
+                st.markdown("💎 **Google Gemini**")
+        
+        with col3:
+            try:
+                st.image("https://github.githubassets.com/images/modules/logos_page/GitHub-Mark.png", 
+                        width=50, caption="GitHub API")
+            except:
+                st.markdown("🐙 **GitHub API**")
     
     def render_sidebar(self, groq_key: str = None) -> str:
         """Render the sidebar and return the API key"""
@@ -397,7 +459,7 @@ class RAGifyUI:
                 os.environ["GROQ_API_KEY"] = groq_key
                 st.success("🚀 API Key Connected!")
             
-            load_docs_clicked = st.button("🔥 Load Documentation", type="primary", disabled=not groq_key)
+            load_docs_clicked = st.button("📥 Load Documentation", type="primary", disabled=not groq_key)
             
             if st.session_state.get('docs_loaded', False):
                 st.markdown('<div class="status-success">✅ Documentation Ready</div>', unsafe_allow_html=True)
