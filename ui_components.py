@@ -347,15 +347,14 @@ class RAGifyUI:
         st.markdown("Get instant answers from **Claude**, **Gemini** & **GitHub** documentation using advanced RAG technology")
     
     def render_api_coverage(self):
-        """Render the API coverage display with emoji icons or font icons"""
+        """Render the API coverage display with emoji icons"""
         col1, col2, col3 = st.columns(3)
         
-        # OPTION 1: Using emoji icons (simplest fix)
         with col1:
             st.markdown("""
             <div class="api-column">
                 <h3 style="margin-top:0; text-align:center;">
-                    🧠 Anthropic Claude
+                    💬 Anthropic Claude
                 </h3>
             </div>
             """, unsafe_allow_html=True)
