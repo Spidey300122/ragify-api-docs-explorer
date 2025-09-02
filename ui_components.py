@@ -542,7 +542,7 @@ class RAGifyUI:
         """Render the main header section"""
         st.markdown("# 🚀 RAGify API Docs Explorer")
         st.markdown('<h3 style="color: #1976d2; text-align: center; margin-bottom: 2rem; font-weight: 600; font-size: 1.8rem;">AI-Powered API Documentation Assistant</h3>', unsafe_allow_html=True)
-        st.markdown('<p style="color: #424242; text-align: center; font-size: 1.4rem; font-weight: 500; line-height: 1.6; margin-bottom: 2.5rem;">Get instant answers from <strong style="color: #ff8c00;">Claude</strong>, <strong style="color: #4285f4;">Gemini</strong> & <strong style="color: #6c757d;">GitHub</strong> documentation using advanced RAG technology</p>', unsafe_allow_html=True)
+        st.markdown('<p style="color: #424242; text-align: center; font-size: 1.4rem; font-weight: 500; line-height: 1.6; margin-bottom: 2.5rem;">Get instant answers from <strong style="color: #ff8c00;">Claude</strong>, <strong style="color: #4285f4;">Gemini</strong> & <strong style="color: #6c757d;">GitHub</strong> documentation using RAG technology</p>', unsafe_allow_html=True)
     
     def render_api_coverage(self):
         """Render the API coverage display"""

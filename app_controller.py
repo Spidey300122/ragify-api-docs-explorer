@@ -113,7 +113,7 @@ class RAGifyController:
         self.ui.render_api_coverage()
         
         st.markdown("---")
-        self.ui.show_info_message("**Quick Start:** 1️⃣ Add Groq API Key → 2️⃣ Load Documentation → 3️⃣ Ask Questions!")
+        self.ui.show_info_message("**Quick Start:** 1️⃣ Add Groq API Key → 2️⃣ Hit Enter Key & Load Documentation → 3️⃣ Ask Questions!")
         
         # Handle sidebar interactions
         groq_key, load_docs_clicked, reset_clicked = self.ui.render_sidebar(
