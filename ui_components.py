@@ -280,17 +280,7 @@ class RAGifyUI:
             margin-top: 1rem;
         }
 
-        /* Columns for API info */
-        .api-column {
-            background: rgba(255,255,255,0.1);
-            backdrop-filter: blur(10px);
-            padding: 1.5rem;
-            border-radius: 15px;
-            border: 2px solid rgba(255,255,255,0.2);
-            margin: 0.5rem;
-            color: white;
-            font-weight: 600;
-        }
+        /* Remove the generic api-column class since we're using inline styles now */
 
         /* Text inputs - Main interface with BLACK text for better readability */
         .stTextInput > div > div > input {
@@ -347,22 +337,42 @@ class RAGifyUI:
         st.markdown("Get instant answers from **Claude**, **Gemini** & **GitHub** documentation using advanced RAG technology")
     
     def render_api_coverage(self):
-        """Render the API coverage display with emoji icons"""
+        """Render the API coverage display with specific brand colors"""
         col1, col2, col3 = st.columns(3)
         
         with col1:
             st.markdown("""
-            <div class="api-column">
-                <h3 style="margin-top:0; text-align:center;">
-                    💬 Anthropic Claude
+            <div style="
+                background: linear-gradient(135deg, #FF8C00, #FFA500);
+                backdrop-filter: blur(10px);
+                padding: 1.5rem;
+                border-radius: 15px;
+                border: 2px solid rgba(255,255,255,0.3);
+                margin: 0.5rem;
+                color: white;
+                font-weight: 600;
+                box-shadow: 0 10px 30px rgba(255, 140, 0, 0.3);
+            ">
+                <h3 style="margin-top:0; text-align:center; color: white; text-shadow: 0 2px 4px rgba(0,0,0,0.3);">
+                    🧠 Anthropic Claude
                 </h3>
             </div>
             """, unsafe_allow_html=True)
         
         with col2:
             st.markdown("""
-            <div class="api-column">
-                <h3 style="margin-top:0; text-align:center;">
+            <div style="
+                background: linear-gradient(135deg, #4285F4, #1E88E5);
+                backdrop-filter: blur(10px);
+                padding: 1.5rem;
+                border-radius: 15px;
+                border: 2px solid rgba(255,255,255,0.3);
+                margin: 0.5rem;
+                color: white;
+                font-weight: 600;
+                box-shadow: 0 10px 30px rgba(66, 133, 244, 0.3);
+            ">
+                <h3 style="margin-top:0; text-align:center; color: white; text-shadow: 0 2px 4px rgba(0,0,0,0.3);">
                     💎 Google Gemini
                 </h3>
             </div>
@@ -370,8 +380,18 @@ class RAGifyUI:
         
         with col3:
             st.markdown("""
-            <div class="api-column">
-                <h3 style="margin-top:0; text-align:center;">
+            <div style="
+                background: linear-gradient(135deg, #333333, #24292e);
+                backdrop-filter: blur(10px);
+                padding: 1.5rem;
+                border-radius: 15px;
+                border: 2px solid rgba(255,255,255,0.3);
+                margin: 0.5rem;
+                color: white;
+                font-weight: 600;
+                box-shadow: 0 10px 30px rgba(51, 51, 51, 0.3);
+            ">
+                <h3 style="margin-top:0; text-align:center; color: white; text-shadow: 0 2px 4px rgba(0,0,0,0.3);">
                     🐙 GitHub API
                 </h3>
             </div>
