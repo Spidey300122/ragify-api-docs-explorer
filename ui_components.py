@@ -353,39 +353,30 @@ class RAGifyUI:
         with col1:
             st.markdown("""
             <div class="api-column">
-                <h3 style="margin-top:0; text-align:center;">🟡 Anthropic Claude</h3>
-                <ul style="list-style:none; padding:0;">
-                    <li>🔸 API Messages</li>
-                    <li>🔸 Messages Streaming</li>
-                    <li>🔸 Tool Use & Function Calling</li>
-                    <li>🔸 Prompt Engineering</li>
-                </ul>
+                <h3 style="margin-top:0; text-align:center;">
+                    <img src="./screenshots/image3.png" style="width:30px; height:30px; margin-right:10px; vertical-align:middle;">
+                    Anthropic Claude
+                </h3>
             </div>
             """, unsafe_allow_html=True)
         
         with col2:
             st.markdown("""
             <div class="api-column">
-                <h3 style="margin-top:0; text-align:center;">🔵 Google Gemini</h3>
-                <ul style="list-style:none; padding:0;">
-                    <li>🔹 Generate Content API</li>
-                    <li>🔹 Embeddings</li>
-                    <li>🔹 Safety Settings</li>
-                    <li>🔹 Function Calling</li>
-                </ul>
+                <h3 style="margin-top:0; text-align:center;">
+                    <img src="./screenshots/image4.jpg" style="width:30px; height:30px; margin-right:10px; vertical-align:middle;">
+                    Google Gemini
+                </h3>
             </div>
             """, unsafe_allow_html=True)
         
         with col3:
             st.markdown("""
             <div class="api-column">
-                <h3 style="margin-top:0; text-align:center;">⚫ GitHub API</h3>
-                <ul style="list-style:none; padding:0;">
-                    <li>⚪ Repositories</li>
-                    <li>⚪ Authentication</li>
-                    <li>⚪ Issues Management</li>
-                    <li>⚪ Users</li>
-                </ul>
+                <h3 style="margin-top:0; text-align:center;">
+                    <img src="./screenshots/image5.png" style="width:30px; height:30px; margin-right:10px; vertical-align:middle;">
+                    GitHub API
+                </h3>
             </div>
             """, unsafe_allow_html=True)
     
@@ -421,22 +412,22 @@ class RAGifyUI:
             st.markdown("### 📚 Documentation Coverage")
             st.markdown("""
             **🟡 Anthropic Claude:**
-            - API Messages
-            - Messages Streaming  
-            - Tool Use & Function Calling
-            - Prompt Engineering Overview
+            - [API Messages](https://docs.anthropic.com/en/api/messages)
+            - [Messages Streaming](https://docs.anthropic.com/en/api/messages-streaming)  
+            - [Tool Use & Function Calling](https://docs.anthropic.com/en/docs/build-with-claude/tool-use)
+            - [Prompt Engineering Overview](https://docs.anthropic.com/en/docs/build-with-claude/prompt-engineering/overview)
             
             **🔵 Google Gemini:**
-            - Generate Content API
-            - Embeddings
-            - Safety Settings
-            - Function Calling
+            - [Generate Content API](https://ai.google.dev/api/generate-content)
+            - [Embeddings](https://ai.google.dev/gemini-api/docs/embeddings)
+            - [Safety Settings](https://ai.google.dev/docs/safety_setting_gemini)
+            - [Function Calling](https://ai.google.dev/docs/function_calling)
             
             **⚫ GitHub API:**
-            - Repositories
-            - Authentication
-            - Issues Management
-            - Users
+            - [Repositories](https://docs.github.com/en/rest/repos)
+            - [Authentication](https://docs.github.com/en/rest/authentication)
+            - [Issues Management](https://docs.github.com/en/rest/issues)
+            - [Users](https://docs.github.com/en/rest/users)
             """)
             
             return groq_key, load_docs_clicked, reset_clicked
