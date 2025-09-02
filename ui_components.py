@@ -311,6 +311,13 @@ class RAGifyUI:
             color: #333333 !important;
         }
 
+        /* Force black text for ALL main text inputs */
+        .stTextInput > div > div > input,
+        .stTextInput > div > div > input:focus,
+        .stTextInput > div > div > input:active {
+            color: #333333 !important;
+        }
+
         /* Placeholder text styling */
         .stTextInput > div > div > input::placeholder {
             color: #666666 !important;
