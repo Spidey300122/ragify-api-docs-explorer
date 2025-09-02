@@ -52,10 +52,10 @@ class RAGifyUI:
             padding: 2rem; 
             border-radius: 20px; 
             margin: 1.5rem 0; 
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            background: linear-gradient(135deg, #4ECDC4 0%, #45B7D1 100%);
             color: white; 
             border: 2px solid rgba(255,255,255,0.3);
-            box-shadow: 0 10px 30px rgba(102, 126, 234, 0.4);
+            box-shadow: 0 10px 30px rgba(78, 205, 196, 0.4);
             position: relative;
             overflow: hidden;
         }
@@ -78,14 +78,14 @@ class RAGifyUI:
             width: 100% !important; 
             margin: 0.5rem 0 !important; 
             border-radius: 15px !important;
-            background: linear-gradient(135deg, #667eea, #764ba2) !important;
+            background: linear-gradient(135deg, #4ECDC4, #45B7D1) !important;
             color: white !important; 
             border: 2px solid rgba(255,255,255,0.3) !important; 
             padding: 1rem !important; 
             font-weight: 700 !important;
             font-size: 16px !important;
             transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275) !important;
-            box-shadow: 0 8px 25px rgba(102, 126, 234, 0.3) !important;
+            box-shadow: 0 8px 25px rgba(78, 205, 196, 0.3) !important;
             text-transform: uppercase;
             letter-spacing: 1px;
         }
@@ -250,7 +250,7 @@ class RAGifyUI:
         }
 
         h2, h3 {
-            background: linear-gradient(135deg, #667eea, #764ba2) !important;
+            background: linear-gradient(135deg, #4ECDC4, #45B7D1) !important;
             -webkit-background-clip: text !important;
             -webkit-text-fill-color: transparent !important;
             background-clip: text !important;
@@ -259,7 +259,7 @@ class RAGifyUI:
 
         /* Custom response header */
         .response-header {
-            background: linear-gradient(135deg, #667eea, #764ba2);
+            background: linear-gradient(135deg, #4ECDC4, #45B7D1);
             color: white;
             padding: 1rem 2rem;
             border-radius: 15px 15px 0 0;
