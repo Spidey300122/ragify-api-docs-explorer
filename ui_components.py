@@ -22,29 +22,20 @@ class RAGifyUI:
         st.markdown("""<style>
         @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap');
 
-        /* Main app background - Electric gradient without purple */
+        /* Main app background - Fixed solid background instead of animated gradient */
         .stApp {
-            background: linear-gradient(45deg, #FF6B6B, #4ECDC4, #45B7D1, #96CEB4, #FFEAA7, #98D8C8);
-            background-size: 400% 400%;
-            animation: gradientShift 15s ease infinite;
+            background: #f8fafc;
             font-family: 'Inter', sans-serif;
         }
 
-        @keyframes gradientShift {
-            0% { background-position: 0% 50%; }
-            50% { background-position: 100% 50%; }
-            100% { background-position: 0% 50%; }
-        }
-
-        /* Main content container - Glassmorphism */
+        /* Main content container - Clean white background */
         .main .block-container {
-            background: rgba(255, 255, 255, 0.15);
-            backdrop-filter: blur(20px);
-            border: 2px solid rgba(255, 255, 255, 0.2);
-            border-radius: 25px;
+            background: white;
+            border: 1px solid #e2e8f0;
+            border-radius: 15px;
             padding: 2.5rem;
             margin: 1rem;
-            box-shadow: 0 20px 60px rgba(0,0,0,0.2);
+            box-shadow: 0 4px 20px rgba(0,0,0,0.08);
         }
 
         /* Chat messages - Neon style */
@@ -227,37 +218,39 @@ class RAGifyUI:
             text-shadow: none !important;
         }
 
-        /* Enhanced Sidebar Buttons with Better Colors */
+        /* Enhanced Sidebar Buttons - Force white text more aggressively */
         [data-testid="stSidebar"] .stButton > button {
-            background: #42a5f5 !important;
-            color: white !important;
-            border: 2px solid #42a5f5 !important;
+            background: #2563eb !important;
+            border: 2px solid #2563eb !important;
             border-radius: 10px !important;
             padding: 1.2rem !important;
             font-weight: 700 !important;
             width: 100% !important;
             margin: 1rem 0 !important;
             transition: all 0.3s ease !important;
-            box-shadow: 0 6px 20px rgba(66, 165, 245, 0.3) !important;
+            box-shadow: 0 6px 20px rgba(37, 99, 235, 0.3) !important;
             text-transform: none !important;
             letter-spacing: 0.8px !important;
             font-size: 15px !important;
         }
 
         [data-testid="stSidebar"] .stButton > button:hover {
-            background: #29b6f6 !important;
-            border-color: #29b6f6 !important;
+            background: #1d4ed8 !important;
+            border-color: #1d4ed8 !important;
             transform: translateY(-2px) !important;
-            box-shadow: 0 6px 20px rgba(41, 182, 246, 0.3) !important;
-            color: white !important;
+            box-shadow: 0 6px 20px rgba(29, 78, 216, 0.4) !important;
         }
 
-        /* Force white text for ALL sidebar buttons */
+        /* Force white text for ALL sidebar buttons - Override everything */
+        [data-testid="stSidebar"] .stButton > button *,
         [data-testid="stSidebar"] .stButton > button,
+        [data-testid="stSidebar"] .stButton > button:hover *,
         [data-testid="stSidebar"] .stButton > button:hover,
+        [data-testid="stSidebar"] .stButton > button:active *,
         [data-testid="stSidebar"] .stButton > button:active,
+        [data-testid="stSidebar"] .stButton > button:focus *,
         [data-testid="stSidebar"] .stButton > button:focus {
-            color: white !important;
+            color: #ffffff !important;
         }
 
         /* Sidebar Input Fields */
@@ -312,24 +305,32 @@ class RAGifyUI:
             font-weight: 600 !important;
         }
 
-        /* Headers - Rainbow text */
+        /* Headers - Improved readability with dark text */
         h1 {
-            background: linear-gradient(45deg, #FF6B6B, #4ECDC4, #45B7D1, #96CEB4, #FFEAA7) !important;
-            -webkit-background-clip: text !important;
-            -webkit-text-fill-color: transparent !important;
-            background-clip: text !important;
+            color: #1e293b !important;
             font-weight: 800 !important;
-            font-size: 3rem !important;
+            font-size: 3.5rem !important;
             text-align: center !important;
-            margin-bottom: 0 !important;
+            margin-bottom: 1rem !important;
         }
 
         h2, h3 {
-            background: linear-gradient(135deg, #4ECDC4, #45B7D1) !important;
-            -webkit-background-clip: text !important;
-            -webkit-text-fill-color: transparent !important;
-            background-clip: text !important;
+            color: #334155 !important;
             font-weight: 700 !important;
+            font-size: 1.8rem !important;
+        }
+
+        /* Increase font sizes for main content */
+        .stMarkdown p {
+            font-size: 1.2rem !important;
+            color: #475569 !important;
+            font-weight: 500 !important;
+        }
+
+        /* Quick Start section */
+        .stInfo p {
+            font-size: 1.3rem !important;
+            font-weight: 600 !important;
         }
 
         /* Custom response header */
@@ -355,16 +356,15 @@ class RAGifyUI:
             margin-top: 1rem;
         }
 
-        /* Columns for API info */
+        /* Columns for API info - Clean styling */
         .api-column {
-            background: rgba(255,255,255,0.1);
-            backdrop-filter: blur(10px);
+            background: white;
+            border: 2px solid #e2e8f0;
             padding: 1.5rem;
             border-radius: 15px;
-            border: 2px solid rgba(255,255,255,0.2);
             margin: 0.5rem;
-            color: white;
             font-weight: 600;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.05);
         }
 
         /* Text inputs - Main interface with BLACK text for better readability */
