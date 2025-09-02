@@ -22,9 +22,9 @@ class RAGifyUI:
         st.markdown("""<style>
         @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap');
 
-        /* Main app background - Electric gradient */
+        /* Main app background - Electric gradient without purple */
         .stApp {
-            background: linear-gradient(45deg, #FF6B6B, #4ECDC4, #45B7D1, #96CEB4, #FFEAA7, #DDA0DD, #98D8C8);
+            background: linear-gradient(45deg, #FF6B6B, #4ECDC4, #45B7D1, #96CEB4, #FFEAA7, #98D8C8);
             background-size: 400% 400%;
             animation: gradientShift 15s ease infinite;
             font-family: 'Inter', sans-serif;
@@ -280,7 +280,17 @@ class RAGifyUI:
             margin-top: 1rem;
         }
 
-        /* Remove the generic api-column class since we're using inline styles now */
+        /* Columns for API info */
+        .api-column {
+            background: rgba(255,255,255,0.1);
+            backdrop-filter: blur(10px);
+            padding: 1.5rem;
+            border-radius: 15px;
+            border: 2px solid rgba(255,255,255,0.2);
+            margin: 0.5rem;
+            color: white;
+            font-weight: 600;
+        }
 
         /* Text inputs - Main interface with BLACK text for better readability */
         .stTextInput > div > div > input {
@@ -323,11 +333,8 @@ class RAGifyUI:
             border: 2px solid rgba(255,255,255,0.3) !important;
         }
 
-        /* Markdown styling */
-        p, li {
-            color: rgba(255,255,255,0.9) !important;
-            font-weight: 500 !important;
-        }
+        /* Markdown styling - Let elements use natural colors */
+        /* Removed forced color styling to prevent purple bleeding */
         </style>""", unsafe_allow_html=True)
     
     def render_header(self):
@@ -366,70 +373,6 @@ class RAGifyUI:
                 </h3>
             </div>
             """, unsafe_allow_html=True)
-            
-    def render_api_coverage_with_font_awesome(self):
-        """Alternative: Using Font Awesome icons from CDN"""
-        st.markdown("""
-        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
-        """, unsafe_allow_html=True)
-        
-        col1, col2, col3 = st.columns(3)
-        
-        with col1:
-            st.markdown("""
-            <div class="api-column">
-                <h3 style="margin-top:0; text-align:center;">
-                    <i class="fas fa-robot" style="color:#FFA500; margin-right:10px;"></i>
-                    Anthropic Claude
-                </h3>
-            </div>
-            """, unsafe_allow_html=True)
-        
-        with col2:
-            st.markdown("""
-            <div class="api-column">
-                <h3 style="margin-top:0; text-align:center;">
-                    <i class="fab fa-google" style="color:#4285F4; margin-right:10px;"></i>
-                    Google Gemini
-                </h3>
-            </div>
-            """, unsafe_allow_html=True)
-        
-        with col3:
-            st.markdown("""
-            <div class="api-column">
-                <h3 style="margin-top:0; text-align:center;">
-                    <i class="fab fa-github" style="color:#333; margin-right:10px;"></i>
-                    GitHub API
-                </h3>
-            </div>
-            """, unsafe_allow_html=True)
-    
-    def render_api_coverage_with_streamlit_images(self):
-        """Alternative: Using st.image() with online images"""
-        col1, col2, col3 = st.columns(3)
-        
-        # You can use publicly available logo URLs
-        with col1:
-            try:
-                st.image("https://upload.wikimedia.org/wikipedia/commons/7/7a/Anthropic_logo.svg", 
-                        width=50, caption="Anthropic Claude")
-            except:
-                st.markdown("🧠 **Anthropic Claude**")
-        
-        with col2:
-            try:
-                st.image("https://upload.wikimedia.org/wikipedia/commons/8/8a/Google_Gemini_logo.svg", 
-                        width=50, caption="Google Gemini")
-            except:
-                st.markdown("💎 **Google Gemini**")
-        
-        with col3:
-            try:
-                st.image("https://github.githubassets.com/images/modules/logos_page/GitHub-Mark.png", 
-                        width=50, caption="GitHub API")
-            except:
-                st.markdown("🐙 **GitHub API**")
     
     def render_sidebar(self, groq_key: str = None) -> str:
         """Render the sidebar and return the API key"""
@@ -448,7 +391,7 @@ class RAGifyUI:
                 os.environ["GROQ_API_KEY"] = groq_key
                 st.success("🚀 API Key Connected!")
             
-            load_docs_clicked = st.button("📥 Load Documentation", type="primary", disabled=not groq_key)
+            load_docs_clicked = st.button("🔥 Load Documentation", type="primary", disabled=not groq_key)
             
             if st.session_state.get('docs_loaded', False):
                 st.markdown('<div class="status-success">✅ Documentation Ready</div>', unsafe_allow_html=True)
