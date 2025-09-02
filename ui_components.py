@@ -28,15 +28,28 @@ class RAGifyUI:
             font-family: 'Inter', sans-serif;
         }
 
-        /* Main content container - Clean white background */
+        /* Main content container - Enhanced with better spacing */
         .main .block-container {
             background: rgba(255, 255, 255, 0.95);
             border: 1px solid #e2e8f0;
-            border-radius: 15px;
-            padding: 2.5rem;
-            margin: 1rem;
-            box-shadow: 0 4px 20px rgba(0,0,0,0.08);
+            border-radius: 20px;
+            padding: 3rem;
+            margin: 1.5rem;
+            box-shadow: 0 8px 32px rgba(0,0,0,0.1);
             backdrop-filter: blur(10px);
+        }
+
+        /* Enhanced spacing and visual hierarchy */
+        .main .block-container > div:first-child {
+            margin-bottom: 1rem;
+        }
+
+        /* Divider styling */
+        hr {
+            border: none !important;
+            height: 2px !important;
+            background: linear-gradient(90deg, transparent, #e2e8f0, transparent) !important;
+            margin: 2.5rem 0 !important;
         }
 
         /* Chat messages - Neon style */
@@ -65,28 +78,27 @@ class RAGifyUI:
             100% { transform: translateX(100%); }
         }
 
-        /* Buttons - Electric neon */
+        /* Enhanced Buttons with modern gradients */
         .stButton > button {
             width: 100% !important; 
             margin: 0.5rem 0 !important; 
-            border-radius: 15px !important;
-            background: linear-gradient(135deg, #4ECDC4, #45B7D1) !important;
+            border-radius: 12px !important;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%) !important;
             color: white !important; 
-            border: 2px solid rgba(255,255,255,0.3) !important; 
-            padding: 1rem !important; 
+            border: none !important; 
+            padding: 1rem 1.5rem !important; 
             font-weight: 700 !important;
             font-size: 16px !important;
-            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275) !important;
-            box-shadow: 0 8px 25px rgba(78, 205, 196, 0.3) !important;
-            text-transform: uppercase;
-            letter-spacing: 1px;
+            transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275) !important;
+            box-shadow: 0 6px 20px rgba(102, 126, 234, 0.3) !important;
+            text-transform: none !important;
+            letter-spacing: 0.5px !important;
         }
 
         .stButton > button:hover {
-            background: linear-gradient(135deg, #FF6B6B, #4ECDC4) !important;
-            transform: translateY(-5px) scale(1.02) !important;
-            box-shadow: 0 15px 35px rgba(255, 107, 107, 0.4) !important;
-            border-color: rgba(255,255,255,0.5) !important;
+            background: linear-gradient(135deg, #764ba2 0%, #667eea 100%) !important;
+            transform: translateY(-3px) !important;
+            box-shadow: 0 8px 25px rgba(118, 75, 162, 0.4) !important;
         }
 
         /* Success status - Glowing */
@@ -306,32 +318,39 @@ class RAGifyUI:
             font-weight: 600 !important;
         }
 
-        /* Headers - Colored headings for better visual appeal */
+        /* Headers - Enhanced typography with better hierarchy */
         h1 {
             color: #1565c0 !important;
-            font-weight: 800 !important;
-            font-size: 3.5rem !important;
+            font-weight: 900 !important;
+            font-size: 4rem !important;
             text-align: center !important;
-            margin-bottom: 1rem !important;
+            margin-bottom: 0.5rem !important;
+            letter-spacing: -0.02em !important;
         }
 
         h2, h3 {
             color: #1976d2 !important;
             font-weight: 700 !important;
-            font-size: 1.8rem !important;
+            font-size: 2rem !important;
         }
 
-        /* Increase font sizes for main content */
+        /* Enhanced font sizes for main content */
         .stMarkdown p {
-            font-size: 1.2rem !important;
+            font-size: 1.3rem !important;
             color: #424242 !important;
             font-weight: 500 !important;
+            line-height: 1.6 !important;
         }
 
-        /* Quick Start section */
+        /* Enhanced Quick Start and Info sections */
         .stInfo p {
-            font-size: 1.3rem !important;
-            font-weight: 600 !important;
+            font-size: 1.5rem !important;
+            font-weight: 700 !important;
+            line-height: 1.5 !important;
+        }
+
+        .stInfo {
+            margin: 2rem 0 !important;
         }
 
         /* Custom response header */
@@ -357,19 +376,21 @@ class RAGifyUI:
             margin-top: 1rem;
         }
 
-        /* API Columns with white background and shining effects */
+        /* API Columns - Reduced size with white background and shining effects */
         .api-column {
             background: white;
-            padding: 1.5rem;
-            border-radius: 15px;
-            margin: 0.5rem;
+            padding: 1.2rem;
+            border-radius: 12px;
+            margin: 0.3rem;
             font-weight: 600;
-            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+            box-shadow: 0 3px 12px rgba(0,0,0,0.08);
             transition: all 0.3s ease;
             position: relative;
             overflow: hidden;
             cursor: default;
             text-decoration: none;
+            max-width: 280px;
+            margin: 0 auto;
         }
 
         /* Remove any link styling and hover link icons */
@@ -391,14 +412,14 @@ class RAGifyUI:
         .api-column-claude {
             background: white;
             border: 2px solid #ff8c00;
-            box-shadow: 0 4px 15px rgba(255, 140, 0, 0.3);
+            box-shadow: 0 3px 12px rgba(255, 140, 0, 0.25);
         }
 
         .api-column-claude::before {
             content: '';
             position: absolute;
             top: 0; left: -100%; right: 100%; bottom: 0;
-            background: linear-gradient(90deg, transparent, rgba(255, 140, 0, 0.3), transparent);
+            background: linear-gradient(90deg, transparent, rgba(255, 140, 0, 0.25), transparent);
             animation: shine 2.5s infinite;
             z-index: 1;
         }
@@ -407,20 +428,22 @@ class RAGifyUI:
             color: #ff8c00 !important;
             position: relative;
             z-index: 2;
+            font-size: 1.4rem !important;
+            margin: 0 !important;
         }
 
         /* Google Gemini - Blue with shining */
         .api-column-gemini {
             background: white;
             border: 2px solid #4285f4;
-            box-shadow: 0 4px 15px rgba(66, 133, 244, 0.3);
+            box-shadow: 0 3px 12px rgba(66, 133, 244, 0.25);
         }
 
         .api-column-gemini::before {
             content: '';
             position: absolute;
             top: 0; left: -100%; right: 100%; bottom: 0;
-            background: linear-gradient(90deg, transparent, rgba(66, 133, 244, 0.3), transparent);
+            background: linear-gradient(90deg, transparent, rgba(66, 133, 244, 0.25), transparent);
             animation: shine 3s infinite;
             z-index: 1;
         }
@@ -429,13 +452,15 @@ class RAGifyUI:
             color: #4285f4 !important;
             position: relative;
             z-index: 2;
+            font-size: 1.4rem !important;
+            margin: 0 !important;
         }
 
         /* GitHub - Grey with shining effect */
         .api-column-github {
             background: white;
             border: 2px solid #6c757d;
-            box-shadow: 0 4px 15px rgba(108, 117, 125, 0.3);
+            box-shadow: 0 3px 12px rgba(108, 117, 125, 0.25);
             position: relative;
         }
 
@@ -443,7 +468,7 @@ class RAGifyUI:
             content: '';
             position: absolute;
             top: 0; left: -100%; right: 100%; bottom: 0;
-            background: linear-gradient(90deg, transparent, rgba(108, 117, 125, 0.4), transparent);
+            background: linear-gradient(90deg, transparent, rgba(108, 117, 125, 0.3), transparent);
             animation: shine 2s infinite;
             z-index: 1;
         }
@@ -452,6 +477,8 @@ class RAGifyUI:
             color: #6c757d !important;
             position: relative;
             z-index: 2;
+            font-size: 1.4rem !important;
+            margin: 0 !important;
         }
 
         @keyframes shine {
@@ -459,10 +486,11 @@ class RAGifyUI:
             100% { left: 100%; right: -100%; }
         }
 
-        /* Hover effects for all API columns - No link behavior, just subtle lift */
+        /* Subtle hover effects - No link behavior, just gentle lift */
         .api-column:hover {
-            transform: translateY(-3px);
+            transform: translateY(-2px);
             cursor: default;
+            box-shadow: 0 6px 20px rgba(0,0,0,0.12);
         }
 
         /* Text inputs - Main interface with BLACK text for better readability */
@@ -513,8 +541,8 @@ class RAGifyUI:
     def render_header(self):
         """Render the main header section"""
         st.markdown("# 🚀 RAGify API Docs Explorer")
-        st.markdown('<h3 style="color: #1976d2; text-align: center; margin-bottom: 1rem;">AI-Powered API Documentation Assistant</h3>', unsafe_allow_html=True)
-        st.markdown('<p style="color: #424242; text-align: center; font-size: 1.2rem; font-weight: 500;">Get instant answers from <strong style="color: #ff8c00;">Claude</strong>, <strong style="color: #4285f4;">Gemini</strong> & <strong style="color: #6c757d;">GitHub</strong> documentation using advanced RAG technology</p>', unsafe_allow_html=True)
+        st.markdown('<h3 style="color: #1976d2; text-align: center; margin-bottom: 2rem; font-weight: 600; font-size: 1.8rem;">AI-Powered API Documentation Assistant</h3>', unsafe_allow_html=True)
+        st.markdown('<p style="color: #424242; text-align: center; font-size: 1.4rem; font-weight: 500; line-height: 1.6; margin-bottom: 2.5rem;">Get instant answers from <strong style="color: #ff8c00;">Claude</strong>, <strong style="color: #4285f4;">Gemini</strong> & <strong style="color: #6c757d;">GitHub</strong> documentation using advanced RAG technology</p>', unsafe_allow_html=True)
     
     def render_api_coverage(self):
         """Render the API coverage display"""
