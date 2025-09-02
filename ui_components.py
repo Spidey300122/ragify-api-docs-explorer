@@ -185,11 +185,86 @@ class RAGifyUI:
             color: white !important;
         }
 
+        /* ENHANCED LIGHT BLUE SIDEBAR STYLING */
+        [data-testid="stSidebar"] {
+            background: linear-gradient(180deg, #f0f8ff 0%, #e6f3ff 25%, #cce7ff 50%, #b3daff 75%, #99ccff 100%) !important;
+            border-right: 3px solid #66b3ff !important;
+            position: relative !important;
+        }
+
+        [data-testid="stSidebar"] > div {
+            background: transparent !important;
+            padding: 2.5rem 2rem !important;
+            position: relative;
+            z-index: 1;
+        }
+
+        /* Enhanced Sidebar Headers */
+        [data-testid="stSidebar"] h3 {
+            color: #2c5aa0 !important;
+            font-weight: 800 !important;
+            font-size: 1.6rem !important;
+            margin-bottom: 2rem !important;
+            text-align: center !important;
+            text-shadow: none !important;
+            letter-spacing: 0.5px !important;
+        }
+
+        /* Sidebar Text with Lighter Blue Colors */
+        [data-testid="stSidebar"] p,
+        [data-testid="stSidebar"] li,
+        [data-testid="stSidebar"] span,
+        [data-testid="stSidebar"] div {
+            color: #1565c0 !important;
+            font-weight: 600 !important;
+            text-shadow: none !important;
+        }
+
+        /* Sidebar Strong Text */
+        [data-testid="stSidebar"] strong {
+            color: #0d47a1 !important;
+            font-weight: 700 !important;
+            text-shadow: none !important;
+        }
+
+        /* Enhanced Sidebar Buttons with Better Colors */
+        [data-testid="stSidebar"] .stButton > button {
+            background: #42a5f5 !important;
+            color: white !important;
+            border: 2px solid #42a5f5 !important;
+            border-radius: 10px !important;
+            padding: 1.2rem !important;
+            font-weight: 700 !important;
+            width: 100% !important;
+            margin: 1rem 0 !important;
+            transition: all 0.3s ease !important;
+            box-shadow: 0 6px 20px rgba(66, 165, 245, 0.3) !important;
+            text-transform: none !important;
+            letter-spacing: 0.8px !important;
+            font-size: 15px !important;
+        }
+
+        [data-testid="stSidebar"] .stButton > button:hover {
+            background: #29b6f6 !important;
+            border-color: #29b6f6 !important;
+            transform: translateY(-2px) !important;
+            box-shadow: 0 6px 20px rgba(41, 182, 246, 0.3) !important;
+            color: white !important;
+        }
+
+        /* Force white text for ALL sidebar buttons */
+        [data-testid="stSidebar"] .stButton > button,
+        [data-testid="stSidebar"] .stButton > button:hover,
+        [data-testid="stSidebar"] .stButton > button:active,
+        [data-testid="stSidebar"] .stButton > button:focus {
+            color: white !important;
+        }
+
         /* Sidebar Input Fields */
         [data-testid="stSidebar"] .stTextInput input {
             background: white !important;
             color: #495057 !important;
-            border: 2px solid #ced4da !important;
+            border: 2px solid #90caf9 !important;
             border-radius: 6px !important;
             padding: 0.75rem !important;
             font-weight: 500 !important;
@@ -197,8 +272,8 @@ class RAGifyUI:
         }
 
         [data-testid="stSidebar"] .stTextInput input:focus {
-            border-color: #17a2b8 !important;
-            box-shadow: 0 0 0 0.2rem rgba(23, 162, 184, 0.25) !important;
+            border-color: #42a5f5 !important;
+            box-shadow: 0 0 0 0.2rem rgba(66, 165, 245, 0.25) !important;
             background: white !important;
         }
 
@@ -208,32 +283,32 @@ class RAGifyUI:
 
         /* Enhanced Alert Boxes in Sidebar */
         [data-testid="stSidebar"] .stSuccess > div {
-            background: #17a2b8 !important;
+            background: #4caf50 !important;
             color: white !important;
             border-radius: 6px !important;
             padding: 1rem !important;
             border: none !important;
-            box-shadow: 0 4px 15px rgba(23, 162, 184, 0.2) !important;
+            box-shadow: 0 4px 15px rgba(76, 175, 80, 0.2) !important;
             font-weight: 600 !important;
         }
 
         [data-testid="stSidebar"] .stWarning > div {
-            background: #ffc107 !important;
-            color: #212529 !important;
-            border-radius: 6px !important;
-            padding: 1rem !important;
-            border: none !important;
-            box-shadow: 0 4px 15px rgba(255, 193, 7, 0.2) !important;
-            font-weight: 600 !important;
-        }
-
-        [data-testid="stSidebar"] .stInfo > div {
-            background: #6c757d !important;
+            background: #ff9800 !important;
             color: white !important;
             border-radius: 6px !important;
             padding: 1rem !important;
             border: none !important;
-            box-shadow: 0 4px 15px rgba(108, 117, 125, 0.2) !important;
+            box-shadow: 0 4px 15px rgba(255, 152, 0, 0.2) !important;
+            font-weight: 600 !important;
+        }
+
+        [data-testid="stSidebar"] .stInfo > div {
+            background: #2196f3 !important;
+            color: white !important;
+            border-radius: 6px !important;
+            padding: 1rem !important;
+            border: none !important;
+            box-shadow: 0 4px 15px rgba(33, 150, 243, 0.2) !important;
             font-weight: 600 !important;
         }
 
