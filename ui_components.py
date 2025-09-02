@@ -356,15 +356,87 @@ class RAGifyUI:
             margin-top: 1rem;
         }
 
-        /* Columns for API info - Clean styling */
+        /* API Columns with specific colors and light blue background */
         .api-column {
-            background: white;
-            border: 2px solid #e2e8f0;
+            background: linear-gradient(135deg, #e3f2fd 0%, #f0f8ff 100%);
             padding: 1.5rem;
             border-radius: 15px;
             margin: 0.5rem;
             font-weight: 600;
-            box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+            cursor: default;
+            text-decoration: none;
+        }
+
+        /* Remove any link styling */
+        .api-column a,
+        .api-column:link,
+        .api-column:visited,
+        .api-column:hover,
+        .api-column:active {
+            text-decoration: none !important;
+            color: inherit !important;
+        }
+
+        /* Anthropic Claude - Orange */
+        .api-column-claude {
+            background: linear-gradient(135deg, #e3f2fd 0%, #f0f8ff 100%);
+            border: 2px solid #ff8c00;
+            box-shadow: 0 4px 15px rgba(255, 140, 0, 0.3);
+        }
+
+        .api-column-claude h3 {
+            color: #ff8c00 !important;
+            text-shadow: 0 0 10px rgba(255, 140, 0, 0.3);
+        }
+
+        /* Google Gemini - Blue */
+        .api-column-gemini {
+            background: linear-gradient(135deg, #e3f2fd 0%, #f0f8ff 100%);
+            border: 2px solid #4285f4;
+            box-shadow: 0 4px 15px rgba(66, 133, 244, 0.3);
+        }
+
+        .api-column-gemini h3 {
+            color: #4285f4 !important;
+            text-shadow: 0 0 10px rgba(66, 133, 244, 0.3);
+        }
+
+        /* GitHub - Grey with shining effect */
+        .api-column-github {
+            background: linear-gradient(135deg, #e3f2fd 0%, #f0f8ff 100%);
+            border: 2px solid #6c757d;
+            box-shadow: 0 4px 15px rgba(108, 117, 125, 0.3);
+            position: relative;
+        }
+
+        .api-column-github::before {
+            content: '';
+            position: absolute;
+            top: 0; left: -100%; right: 100%; bottom: 0;
+            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.4), transparent);
+            animation: shine 2s infinite;
+            z-index: 1;
+        }
+
+        .api-column-github h3 {
+            color: #6c757d !important;
+            text-shadow: 0 0 10px rgba(108, 117, 125, 0.3);
+            position: relative;
+            z-index: 2;
+        }
+
+        @keyframes shine {
+            0% { left: -100%; right: 100%; }
+            100% { left: 100%; right: -100%; }
+        }
+
+        /* Hover effects for all API columns - No link behavior */
+        .api-column:hover {
+            transform: translateY(-5px) scale(1.02);
         }
 
         /* Text inputs - Main interface with BLACK text for better readability */
@@ -424,8 +496,8 @@ class RAGifyUI:
         
         with col1:
             st.markdown("""
-            <div class="api-column">
-                <h3 style="margin-top:0; text-align:center; color:#FF8C00;">
+            <div class="api-column api-column-claude">
+                <h3 style="margin-top:0; text-align:center;">
                     • Anthropic Claude
                 </h3>
             </div>
@@ -433,8 +505,8 @@ class RAGifyUI:
         
         with col2:
             st.markdown("""
-            <div class="api-column">
-                <h3 style="margin-top:0; text-align:center; color:#4285F4;">
+            <div class="api-column api-column-gemini">
+                <h3 style="margin-top:0; text-align:center;">
                     • Google Gemini
                 </h3>
             </div>
@@ -442,8 +514,8 @@ class RAGifyUI:
         
         with col3:
             st.markdown("""
-            <div class="api-column">
-                <h3 style="margin-top:0; text-align:center; color:#000000;">
+            <div class="api-column api-column-github">
+                <h3 style="margin-top:0; text-align:center;">
                     • GitHub API
                 </h3>
             </div>
@@ -466,7 +538,7 @@ class RAGifyUI:
                 os.environ["GROQ_API_KEY"] = groq_key
                 st.success("🚀 API Key Connected!")
             
-            load_docs_clicked = st.button("🔥 Load Documentation", type="primary", disabled=not groq_key)
+            load_docs_clicked = st.button("📥 Load Documentation", type="primary", disabled=not groq_key)
             
             if st.session_state.get('docs_loaded', False):
                 st.markdown('<div class="status-success">✅ Documentation Ready</div>', unsafe_allow_html=True)
@@ -481,22 +553,22 @@ class RAGifyUI:
             st.markdown("### 📚 Documentation Coverage")
             st.markdown("""
             **🟡 Anthropic Claude:**
-            - [API Messages](https://docs.anthropic.com/en/api/messages)
-            - [Messages Streaming](https://docs.anthropic.com/en/api/messages-streaming)  
-            - [Tool Use & Function Calling](https://docs.anthropic.com/en/docs/build-with-claude/tool-use)
-            - [Prompt Engineering Overview](https://docs.anthropic.com/en/docs/build-with-claude/prompt-engineering/overview)
+            - API Messages
+            - Messages Streaming  
+            - Tool Use & Function Calling
+            - Prompt Engineering Overview
             
             **🔵 Google Gemini:**
-            - [Generate Content API](https://ai.google.dev/api/generate-content)
-            - [Embeddings](https://ai.google.dev/gemini-api/docs/embeddings)
-            - [Safety Settings](https://ai.google.dev/docs/safety_setting_gemini)
-            - [Function Calling](https://ai.google.dev/docs/function_calling)
+            - Generate Content API
+            - Embeddings
+            - Safety Settings
+            - Function Calling
             
             **⚫ GitHub API:**
-            - [Repositories](https://docs.github.com/en/rest/repos)
-            - [Authentication](https://docs.github.com/en/rest/authentication)
-            - [Issues Management](https://docs.github.com/en/rest/issues)
-            - [Users](https://docs.github.com/en/rest/users)
+            - Repositories
+            - Authentication
+            - Issues Management
+            - Users
             """)
             
             return groq_key, load_docs_clicked, reset_clicked
