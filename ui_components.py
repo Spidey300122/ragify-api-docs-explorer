@@ -22,20 +22,21 @@ class RAGifyUI:
         st.markdown("""<style>
         @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap');
 
-        /* Main app background - Fixed solid background instead of animated gradient */
+        /* Main app background - Light blue background */
         .stApp {
-            background: #f8fafc;
+            background: linear-gradient(135deg, #e3f2fd 0%, #f0f8ff 50%, #e1f5fe 100%);
             font-family: 'Inter', sans-serif;
         }
 
         /* Main content container - Clean white background */
         .main .block-container {
-            background: white;
+            background: rgba(255, 255, 255, 0.95);
             border: 1px solid #e2e8f0;
             border-radius: 15px;
             padding: 2.5rem;
             margin: 1rem;
             box-shadow: 0 4px 20px rgba(0,0,0,0.08);
+            backdrop-filter: blur(10px);
         }
 
         /* Chat messages - Neon style */
@@ -305,9 +306,9 @@ class RAGifyUI:
             font-weight: 600 !important;
         }
 
-        /* Headers - Improved readability with dark text */
+        /* Headers - Colored headings for better visual appeal */
         h1 {
-            color: #1e293b !important;
+            color: #1565c0 !important;
             font-weight: 800 !important;
             font-size: 3.5rem !important;
             text-align: center !important;
@@ -315,7 +316,7 @@ class RAGifyUI:
         }
 
         h2, h3 {
-            color: #334155 !important;
+            color: #1976d2 !important;
             font-weight: 700 !important;
             font-size: 1.8rem !important;
         }
@@ -323,7 +324,7 @@ class RAGifyUI:
         /* Increase font sizes for main content */
         .stMarkdown p {
             font-size: 1.2rem !important;
-            color: #475569 !important;
+            color: #424242 !important;
             font-weight: 500 !important;
         }
 
@@ -356,9 +357,9 @@ class RAGifyUI:
             margin-top: 1rem;
         }
 
-        /* API Columns with specific colors and light blue background */
+        /* API Columns with white background and shining effects */
         .api-column {
-            background: linear-gradient(135deg, #e3f2fd 0%, #f0f8ff 100%);
+            background: white;
             padding: 1.5rem;
             border-radius: 15px;
             margin: 0.5rem;
@@ -371,7 +372,7 @@ class RAGifyUI:
             text-decoration: none;
         }
 
-        /* Remove any link styling */
+        /* Remove any link styling and hover link icons */
         .api-column a,
         .api-column:link,
         .api-column:visited,
@@ -381,33 +382,58 @@ class RAGifyUI:
             color: inherit !important;
         }
 
-        /* Anthropic Claude - Orange */
+        /* Remove link icon on hover */
+        .api-column::after {
+            display: none !important;
+        }
+
+        /* Anthropic Claude - Orange with shining */
         .api-column-claude {
-            background: linear-gradient(135deg, #e3f2fd 0%, #f0f8ff 100%);
+            background: white;
             border: 2px solid #ff8c00;
             box-shadow: 0 4px 15px rgba(255, 140, 0, 0.3);
         }
 
-        .api-column-claude h3 {
-            color: #ff8c00 !important;
-            text-shadow: 0 0 10px rgba(255, 140, 0, 0.3);
+        .api-column-claude::before {
+            content: '';
+            position: absolute;
+            top: 0; left: -100%; right: 100%; bottom: 0;
+            background: linear-gradient(90deg, transparent, rgba(255, 140, 0, 0.3), transparent);
+            animation: shine 2.5s infinite;
+            z-index: 1;
         }
 
-        /* Google Gemini - Blue */
+        .api-column-claude h3 {
+            color: #ff8c00 !important;
+            position: relative;
+            z-index: 2;
+        }
+
+        /* Google Gemini - Blue with shining */
         .api-column-gemini {
-            background: linear-gradient(135deg, #e3f2fd 0%, #f0f8ff 100%);
+            background: white;
             border: 2px solid #4285f4;
             box-shadow: 0 4px 15px rgba(66, 133, 244, 0.3);
         }
 
+        .api-column-gemini::before {
+            content: '';
+            position: absolute;
+            top: 0; left: -100%; right: 100%; bottom: 0;
+            background: linear-gradient(90deg, transparent, rgba(66, 133, 244, 0.3), transparent);
+            animation: shine 3s infinite;
+            z-index: 1;
+        }
+
         .api-column-gemini h3 {
             color: #4285f4 !important;
-            text-shadow: 0 0 10px rgba(66, 133, 244, 0.3);
+            position: relative;
+            z-index: 2;
         }
 
         /* GitHub - Grey with shining effect */
         .api-column-github {
-            background: linear-gradient(135deg, #e3f2fd 0%, #f0f8ff 100%);
+            background: white;
             border: 2px solid #6c757d;
             box-shadow: 0 4px 15px rgba(108, 117, 125, 0.3);
             position: relative;
@@ -417,14 +443,13 @@ class RAGifyUI:
             content: '';
             position: absolute;
             top: 0; left: -100%; right: 100%; bottom: 0;
-            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.4), transparent);
+            background: linear-gradient(90deg, transparent, rgba(108, 117, 125, 0.4), transparent);
             animation: shine 2s infinite;
             z-index: 1;
         }
 
         .api-column-github h3 {
             color: #6c757d !important;
-            text-shadow: 0 0 10px rgba(108, 117, 125, 0.3);
             position: relative;
             z-index: 2;
         }
@@ -434,9 +459,10 @@ class RAGifyUI:
             100% { left: 100%; right: -100%; }
         }
 
-        /* Hover effects for all API columns - No link behavior */
+        /* Hover effects for all API columns - No link behavior, just subtle lift */
         .api-column:hover {
-            transform: translateY(-5px) scale(1.02);
+            transform: translateY(-3px);
+            cursor: default;
         }
 
         /* Text inputs - Main interface with BLACK text for better readability */
@@ -487,8 +513,8 @@ class RAGifyUI:
     def render_header(self):
         """Render the main header section"""
         st.markdown("# 🚀 RAGify API Docs Explorer")
-        st.markdown("### AI-Powered API Documentation Assistant")
-        st.markdown("Get instant answers from **Claude**, **Gemini** & **GitHub** documentation using advanced RAG technology")
+        st.markdown('<h3 style="color: #1976d2; text-align: center; margin-bottom: 1rem;">AI-Powered API Documentation Assistant</h3>', unsafe_allow_html=True)
+        st.markdown('<p style="color: #424242; text-align: center; font-size: 1.2rem; font-weight: 500;">Get instant answers from <strong style="color: #ff8c00;">Claude</strong>, <strong style="color: #4285f4;">Gemini</strong> & <strong style="color: #6c757d;">GitHub</strong> documentation using advanced RAG technology</p>', unsafe_allow_html=True)
     
     def render_api_coverage(self):
         """Render the API coverage display"""
