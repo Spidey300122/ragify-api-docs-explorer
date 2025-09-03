@@ -642,7 +642,7 @@ class RAGifyUI:
         query = st.text_input(
             "Enter your question about API documentation:",
             value=st.session_state.get('current_query', ''),
-            placeholder="e.g., How do I authenticate with Claude API using system prompts?",
+            placeholder="e.g., How do I use embeddings with the Google AI Gemini API?",
             key="main_query"
         )
         
